@@ -55,22 +55,3 @@
     border-bottom: #1e8c4e 2px solid;
     border-radius: 5vh;
 }
-
-
-
-
-.changeDetailsForm,
-.changePasswordForm{
-    display: none;
-    z-index: 2;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    height: 70vh;
-    width: 120vh;
-    transform : translate(-50%, -50%);
-}
-
-.changePasswordForm{
-    display: none;
-}

@@ -54,56 +54,7 @@
         <section class="settings">
             <h2>Settings</h2>
             <div class="changeDetails">Change Personal Details</div>
-            <section class="changeDetailsForm">
-                
-                <form action="" method="POST">
-                    <div>
-                        <div>
-                            <button id="closeBtn" type="button"><i class="fa-solid fa-xmark"></i></button>
-                        </div>
-                        <div>
-                            Name: <input type="text" name="updatedName" id="updatedName" value="<?php echo $_SESSION["username"] ?>">
-                        </div>
-                        <div>
-                            <label for="updatedProfilePic">Profile Photo:</label> 
-                            <input type="file" name="updatedProfilePic" id="updatedProfilePic" accept=".png, .jpeg, .jpg">
-                        </div>
-                        <div>
-                            <label for="updatedPhone">Phone:</label> 
-                            <input type="number" name="updatedPhone" id="updatedPhone" value="<?php echo $_SESSION["phone"] ?>">
-                        </div>
-                        <div>
-                            <label for="updatedEmail">Email:</label> 
-                            <input type="email" name="updatedEmail" id="updatedEmail" value="<?php echo $_SESSION["email"] ?>">
-                        </div>
-                        <div>
-                            <button id="resetBtn" type="reset">Reset</button>
-                            <button id="" name="updateDetailsBtn">Update</button>
-                        </div>
-                    </div>
-                    
-                    <?php
-                        if(isset($_POST["updateDetailsBtn"])){
-                            echo "<section>
-                            <p>Confirm User</p>
-                            Enter Password: <input type='password' name='passwordConfirmation'>
-                            <input type='button' value='Confirm' name='confirmUpdateDetails'>
-                            </section>";
-                        }
-                    ?>
-
-
-                </form>
-
-            </section>
             <div class="changePassword">Change Password</div>
-            <section class="changePasswordForm">
-                <form action="" method="POST">
-                    New Password: <input type="password" name="updatedPassword" id="updatedPassword">
-                    Confirm Password: <input type="password" name="updatedConfirmPassword" id="updatedConfirmPassword">
-                    <input type="button" value="Update">
-                </form>
-            </section>
         </section>
 
         <section class="recentLists">

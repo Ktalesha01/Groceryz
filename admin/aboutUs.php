@@ -17,6 +17,7 @@
     <title>About Us | Groceryz</title>
     <link rel="icon" type="image/x-icon" href="../pictures/app_logo.png" sizes="64X64">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/aboutUs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -36,6 +37,39 @@
         </nav>
     </header>
     <main>
+    <div class="header1">
+    <img src="https://via.placeholder.com/150x50?text=Groceryz+Logo" alt="Groceryz Logo" class="logo">
+    <h1>About Us</h1>
+</div>
+
+<div class="container">
+    <img src="https://via.placeholder.com/800x300?text=Fresh+Groceries" alt="Fresh Groceries" class="banner">
+
+    <p>At <strong>Groceryz</strong>, we believe that managing grocery lists should be simple, efficient, and secure. Our journey began with a common frustration: traditional grocery list methods—whether scribbled on paper or managed through basic apps—often lack essential features like real-time collaboration, effective organization, and data security. Recognizing these limitations, we set out to build a solution that transforms the way people handle their grocery shopping tasks.</p>
+
+    <h2>Our Mission</h2>
+    <img src="https://via.placeholder.com/400x200?text=Our+Mission" alt="Our Mission" class="section-image">
+    <p>Our mission is to streamline the grocery shopping experience by providing a powerful yet user-friendly platform that supports seamless collaboration, secure data management, and smart organization. We aim to empower users with tools that save time and reduce the stress of managing grocery lists, making everyday shopping a smoother process.</p>
+
+    <h2>What We Offer</h2>
+    <img src="https://via.placeholder.com/400x200?text=Features" alt="Features" class="section-image">
+    <ul>
+        <li><strong>Role-Based Access:</strong> Manage lists efficiently based on access levels (Admin and Normal Users).</li>
+        <li><strong>Real-Time Collaboration:</strong> Share and update lists effortlessly.</li>
+        <li><strong>Secure Data Handling:</strong> Advanced security measures for data protection.</li>
+        <li><strong>Smart Organization:</strong> Store recent lists and categorize items effectively.</li>
+        <li><strong>Modern Web Technologies:</strong> Fast, responsive, and interactive user experience.</li>
+    </ul>
+
+    <h2>Our Vision</h2>
+    <img src="https://via.placeholder.com/400x200?text=Our+Vision" alt="Our Vision" class="section-image">
+    <p>We envision a world where managing grocery lists is no longer a chore but a convenient and even enjoyable part of your routine. By continuously enhancing our features and incorporating user feedback, we strive to be the go-to app for grocery management.</p>
+
+    <h2>Why Choose Us?</h2>
+    <p>Choosing Groceryz means choosing a platform that values security, efficiency, and user satisfaction. We are committed to providing reliable support and continuously improving our features to adapt to your needs.</p>
+
+    <p>Thank you for being a part of our journey. We’re excited to help you simplify your grocery shopping experience—one list at a time!</p>
+</div>
 
     </main>
     <footer>

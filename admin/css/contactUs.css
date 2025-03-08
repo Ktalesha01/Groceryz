@@ -1,145 +1,116 @@
-/* adminHomePage.css */
-
-/* General Reset */
-body, h1, h2, h3, p, ul, li, figure, header, footer, nav {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
+/* General Styles */
+main {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f8f8f8;
-    color: #333;
+    background-color: #e8f5e9; /* Light green background */
+    margin: 0;
+    padding: 0;
+    color: #2f4f2f;
 }
 
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #27ae60; /* Green Theme */
+/* Header Styles */
+.header1 {
+    background-color: #4caf50; /* Green theme */
     color: #fff;
-}
-
-header figure img {
-    height: 60px;
-}
-
-header nav ul {
-    display: flex;
-    gap: 15px;
-    list-style-type: none;
-}
-
-header nav ul a{
-    color: white;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-
-}
-
-header nav ul a {
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-header nav ul a:hover {
-    background-color: #1e8c4e; /* Darker green on hover */
-}
-
-header nav ul .activeTab {
-    background-color: #1e8c4e; /* Active Tab Styling */
-    font-weight: bold;
-}
-
-/* Main Section */
-main {
-    padding: 20px;
     text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-main section {
+.container {
+    max-width: 900px;
+    margin: 20px auto;
     background-color: #fff;
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 20px auto;
 }
 
-/* Footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+h1, h2 {
+    color: #388e3c; /* Darker green for headings */
 }
 
-footer .socialMedia {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+a {
+    color: #388e3c;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #2f4f2f;
+}
+
+/* Contact Information Styles */
+.contact-info {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-info li {
     margin-bottom: 10px;
 }
 
-footer .socialMedia div a {
+.contact-info i {
+    color: #4caf50;
+    margin-right: 10px;
+}
+
+/* Form Styles */
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background-color: #4caf50; /* Green button */
     color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-footer .socialMedia div a:hover {
-    color: #27ae60; /* Green theme for hover */
+.contact-form button:hover {
+    background-color: #45a049; /* Darker green on hover */
 }
 
-footer nav ul {
+/* Social Links Styles */
+.social-links {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    list-style-type: none;
-    padding: 10px 0;
+    gap: 30px;
+    margin-top: 20px;
 }
 
-footer nav ul li {
-    cursor: pointer;
+.social-links a {
+    text-decoration: none;
+    color: #2f4f2f;
+    text-align: center;
+    transition: color 0.3s;
 }
 
-footer nav ul li:hover {
-    text-decoration: underline;
+.social-links a:hover {
+    color: #4caf50; /* Green on hover */
 }
 
-footer p {
-    font-size: 14px;
-    line-height: 1.4;
+.social-links i {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 30px;
+    transition: transform 0.3s;
+    color: #4caf50;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    header {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+.social-links i:hover {
+    transform: scale(1.2);
+}
 
-    header figure img {
-        margin-bottom: 10px;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    footer .socialMedia {
-        flex-direction: column;
-    }
-
-    footer nav ul {
-        flex-direction: column;
-    }
+.social-links p {
+    margin: 0;
+    color: #388e3c; /* Green for social text */
 }
