@@ -1,93 +1,55 @@
-/* General Styles */
-main {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f0f8f5;
-    margin: 0;
-    padding: 0;
-    color: #2f4f2f;
+body{
+    background-image: url("../../pictures/background_img1.avif");
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-attachment: fixed;
 }
 
-/* Header Styles */
-.header1 {
-    background-color: #4caf50;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
+main{
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main section{
+    padding: 0%;
+    box-sizing: border-box;
+    min-width: 70%;
+    border-radius: 0 7vh 7vh 7vh;
+    border-bottom: .6vh solid #27ae60;
+}
+
+#siteLogo{
+    margin-top: 1vh;
+    height: 25vh;
+    padding: 1vh;
+
+}
+
+section h2{
+    font-size: xx-large;
+    background-color: #27ae60;
+    border-radius:0 7vh 0 3vh;
+    padding: 1vh;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.container{
+    padding: 3vh 5vh 3vh 5vh;
+    font-size: large;
+}
+
+.container img{
+    height: 40vh;
+    border-radius: 2vh;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
-.logo {
-    display: block;
-    margin: 0 auto 10px;
-}
-
-/* Container Styles */
-.container {
-    max-width: 900px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-h1, h2 {
-    color: #388e3c;
-}
-
-h2 {
-    margin-top: 30px;
-}
-
-/* List Styles */
-ul {
-    margin-left: 20px;
-}
-
-ul li {
-    margin-bottom: 10px;
-}
-
-/* Image Styles */
-.banner {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.section-image {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    display: block;
-    margin: 10px 0 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Link Styles */
-a {
-    color: #388e3c;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Button Styles (Optional) */
-button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
+.container ul{
+    list-style-type: none;
 }

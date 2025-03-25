@@ -138,9 +138,11 @@ form button {
 form button:hover {
     background-color: #2ecc71;
 }
+
 p{
     text-align: center;
 }
+
 .login-signup section p span {
     color: #3498db;
     cursor: pointer;
@@ -149,5 +151,5 @@ p{
 
 #errorMessage{
     color: red;
-    margin: 0%;
+    text-align: center;
 }

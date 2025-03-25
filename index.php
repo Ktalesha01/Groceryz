@@ -155,7 +155,9 @@
             <form id="loginForm" name="loginForm" action="" method="post">
                 <input type="text" name="userId" id="userId" placeholder="Phone/ Email..." required>
                 <input type="password" name="password" id="password" placeholder="Password..." required>
-                <p id="errorMessage"><?php echo $status;?></p>
+                <div>
+                    <p id="errorMessage"><?php echo $status;?></p>
+                </div>
                 <p id="forgetPassword"><a href="forgetPassword.php">Forget Password?</a></p>
                 <button id="loginSubmit" name="loginSubmit" type="submit">Login</button>
             </form>
