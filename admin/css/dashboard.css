@@ -1,0 +1,57 @@
+.userInfoSection{
+    display: flex;
+    height: 30.5vh;
+}
+.profilePic{
+    width: 25%;
+    border: 3px solid #1e8c4e;
+    border-radius: 5%;
+    margin: 2% 2% 2% 5%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.profilePic img{
+    border-radius: 5%;
+}
+.userInfo{
+    width: 60%;
+    margin: 3% 5%;
+    justify-content: center;
+    text-align: center;
+}
+#userName, #userRole{
+    color: #1e8c4e;
+}
+#userPhone, #userEmail{
+    font-size: large;
+}
+#userPhone{
+    margin-bottom: 1%;
+}
+#userName{
+    padding-bottom: 0%;
+    width: 100%;
+    font-size: xx-large;
+    margin-bottom: 4%;
+    border-bottom: 2px solid #1e8c4e;
+    border-radius: 5vh;
+}
+#userRole{
+    margin-top: 4%;
+    font-size: large;
+}
+
+.settings div{
+    font-size: large;
+}
+.changeDetails, .changePassword{
+    cursor: pointer;
+    font-size: large;
+    margin: 0% 25%;
+    border-bottom: 2px solid transparent;
+}
+.changeDetails:hover,
+.changePassword:hover{
+    color: #1e8c4e;
+    border-bottom: #1e8c4e 2px solid;
+    border-radius: 5vh;
+}

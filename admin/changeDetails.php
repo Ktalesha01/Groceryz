@@ -1,0 +1,75 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION["username"])){
+    }
+    else{
+        echo "<script>location.href='../index.php'</script>";
+    }
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Groceryz</title>
+    <link rel="icon" type="image/x-icon" href="../pictures/app_logo.png" sizes="64X64">
+    <link rel="stylesheet" href="css/changeDetails.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <?php
+        $errorMessage = "";
+        if(isset($_POST["updateDetailsBtn"])){
+            $updatedName = $_POST["updatedName"];
+            $photo = $_Files["updatedProfilePic"]["tmp_name"];
+            $photoData = file_get_contents($photo);
+            $photoData = base64_encode($photoData);
+            $updatedPhone = $_POST["updatedPhone"];
+            $updatedEmail = $_POST["updatedEmail"];
+
+
+        }
+    ?>
+
+    <section class="changeDetailsSection">
+        <div>
+            <button id="closeBtn" type="button"><i class="fa-solid fa-xl fa-xmark"></i></button>
+        </div>
+        <div id="formName">
+            <h2>Change User Details</h2>
+        </div>
+        <form id="changeDetailsForm" action="confirmPassword.php" method="POST" enctype="multipart/form-data">
+            <div class="maindiv">
+                <div>
+                    <label for="updatedName">Name: </label>
+                    <input type="text" name="updatedName" id="updatedName" value="<?php echo $_SESSION["username"] ?>" required>
+                </div>
+                <div>
+                    <label for="updatedProfilePic">Profile Photo:</label> 
+                    <input type="file" name="updatedProfilePic" id="updatedProfilePic" accept=".png, .jpeg, .jpg">
+                </div>
+                <div>
+                    <label for="updatedPhone">Phone:</label> 
+                    <input type="number" name="updatedPhone" id="updatedPhone" value="<?php echo $_SESSION["phone"] ?>" required>
+                </div>
+                <div>
+                    <label for="updatedEmail">Email:</label> 
+                    <input type="email" name="updatedEmail" id="updatedEmail" value="<?php echo $_SESSION["email"] ?>" required>
+                </div>
+                <div class="errorMessage">
+                    <p><?php echo $errorMessage;?></p>
+                </div>
+                <div class="formBtns">
+                    <button id="resetBtn" type="reset">Reset</button>
+                    <button type="submit" id="updateDetailsBtn" name="updateDetailsBtn">Update</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <script src="js/changeDetails.js"></script>
+</body>
+</html>
