@@ -61,6 +61,10 @@ main {
     padding: 20px;
     text-align: center;
     min-height: 70vh;
+    background-image: url("../../pictures/bg_image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 main section {

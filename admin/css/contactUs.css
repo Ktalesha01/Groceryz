@@ -1,0 +1,155 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main h1{
+    font-size: xx-large;
+    color: #2e7d32;
+    text-decoration: underline;
+}
+
+main h2{
+    font-size: x-large;
+    color: #2e7d32;
+}
+
+main section{
+    border-bottom: solid #2e7d32 .5vh;
+    border-radius: 2vh;
+}
+
+.mainDiv{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
+}
+
+#subDiv1{
+    width: 65%;
+}
+
+#formSection{
+    padding: 7vh 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#formSection p{
+    font-size: x-large;
+    color:black;
+    padding-bottom: 1vh;
+}
+
+#formSection h1{
+    padding: 1vh 0;
+}
+
+#contact-form{
+    width: 70%;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    outline: none;
+    border-color: #27ae60;
+    box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+}
+
+#contact-form textarea{
+    resize: none;
+}
+
+#contact-form button {
+    width: 45%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#contact-form button:hover {
+    background-color: #2ecc71;
+}
+
+.formBtns{
+    width: 100%;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#subDiv2{
+    width: 33%;
+}
+
+#section1{
+    padding: 2vh 0 1vh 0;
+}
+
+#section1 img{
+    border-radius: 1vh;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#section2 h2,
+#section3 h2{
+    margin-bottom: 1vh;
+    text-decoration: underline;
+}
+
+.contact-info{
+    list-style-type: none;
+}
+
+.contact-info a{
+    text-decoration: none;
+    color: #388e3c;
+}
+
+.contact-info a:hover{
+    color: #256d28;
+}
+
+
+.status-banner {
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.success-banner {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+    border: 1px solid #388e3c;
+}
+
+.error-banner {
+    background-color: #ffcdd2;
+    color: #c62828;
+    border: 1px solid #e53935;
+}

@@ -7,6 +7,24 @@
         echo "<script>location.href='../index.php'</script>";
     }
 
+    $status = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $to = "kalpeshtalesha01official@gmail.com"; 
+        $name = htmlspecialchars($_POST["name"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $subject = htmlspecialchars($_POST["subject"]);
+        $message = htmlspecialchars($_POST["message"]);
+
+        $fullMessage = "From: $name <$email>\n\n$message";
+        $headers = "From: $email";
+
+        if (mail($to, $subject, $fullMessage, $headers)) {
+            $status = "success";
+        } else {
+            $status = "error";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -37,38 +55,59 @@
         </nav>
     </header>
     <main>
-        <div>
-            <div>
-                <section>
+        <?php if (isset($_GET["status"]) && $_GET["status"] == "success"): ?>
+            <div class="success-banner">
+                ✅ Your message has been sent successfully!
+            </div>
+        <?php elseif (isset($_GET["status"]) && $_GET["status"] == "error"): ?>
+            <div class="error-banner">
+                ❌ Something went wrong. Please try again.
+            </div>
+        <?php endif; ?>
+
+        <div class="mainDiv">
+            <div id="subDiv1">
+                <section id="formSection" method="POST">
                     <p>We’d Love to Hear From You!</p>
-                    <h2>Send Us a Message</h2>
-                    <form class="contact-form">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Email Address" required>
-                        <input type="text" placeholder="Subject" required>
-                        <textarea placeholder="Message" required></textarea>
-                        <button type="submit">Send Message</button>
+                    <h1>Send Us a Message</h1>
+                    <form id="contact-form" method="post">
+                        <div>
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <input type="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <div>
+                            <input type="text" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div>
+                            <textarea rows="12" name="message" placeholder="Message" required></textarea>
+                        </div>
+                        <div class="formBtns">
+                            <button id="resetBtn" type="reset">Reset</button>
+                            <button id="sendbtn" type="submit">Send Message</button>
+                        </div>
                     </form>
                 </section>
             </div>
 
-            <div>
-                <section>
-                    <img src="" alt="">
+            <div id="subDiv2">
+                <section id="section1">
+                    <img src="../pictures/contact_us.png" width="70%" alt="">
                     <h1>Contact Us</h1>
                 </section>
 
-                <section>
+                <section id="section2">
                     <h2>Contact Information</h2>
                     <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> Email: <a href="mailto:support@groceryz.com">support@groceryz.com</a></li>
-                        <li><i class="fas fa-phone"></i> Phone: +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> Email: <a href="mailto:kalpeshtalesha01@gmail.com">kalpeshtalesha01@gmail.com</a></li>
+                        <li><i class="fas fa-phone"></i> Phone: <a href="tel:+917208495230">+91 72084 95230</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Address:  
-                            Groceryz Inc., 123 Greenway Lane, Suite 100, Seattle, WA 98101, USA</li>
+                            <a href="https://maps.app.goo.gl/X18GVCQZhh5QhJ4T9" target="_blank">Groceryz Inc., Kharigaon, Kalwa, Thane- 400605, Maharashtra, India</a></li>
                     </ul>
                 </section>
 
-                <section>
+                <section id="section3">
                     <h2>Support Hours</h2>
                     <p><strong>Monday – Friday:</strong> 9:00 AM – 6:00 PM (PST)</p>
                     <p><strong>Saturday – Sunday:</strong> Closed</p>
