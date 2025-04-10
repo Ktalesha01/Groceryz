@@ -17,10 +17,7 @@
     <title>User Details | Groceryz</title>
     <link rel="icon" type="image/x-icon" href="../pictures/app_logo.png" sizes="64X64">
     <link rel="stylesheet" href="css/common.css">
-<<<<<<< HEAD
     <link rel="stylesheet" href="css/userDetails.css">
-=======
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -44,7 +41,6 @@
     <main>
         <section>
             <div>
-<<<<<<< HEAD
                 <form id="filterForm" name="filterForm" method="GET" action="userDetails.php">
                     Sort:
                     <select name="sort" id="userSorting" onchange="this.form.submit()">
@@ -58,23 +54,6 @@
                     <input type="search" name="search" id="userSearch" placeholder="Search user..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
                     <button type="submit" id="searchBtn" name="searchBtn">Search</button>
                 </form>
-=======
-                <div>
-                    Sort:
-                    <span>
-                        <select name="userSorting" id="userSorting">
-                            <option value="default">default</option>
-                            <option value="idAsc">id ascending</option>
-                            <option value="idDesc">id descending</option>
-                            <option value="nameAsc">name ascending</option>
-                            <option value="nameDesc">name descending</option>
-                        </select>
-                    </span>
-                </div>
-                <div>
-                    
-                </div>
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
             </div>
             <table>
                 <thead>
@@ -84,16 +63,12 @@
                         <th>Phone No.</th>
                         <th>Email Id</th>
                         <th>Role</th>
-<<<<<<< HEAD
                         <th> </th>
-=======
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
                     </tr>
                 </thead>
                 <tbody>
             <?php
                 require "../php/databaseConnect.php";
-<<<<<<< HEAD
 
                 $search = $_GET['search'] ?? '';
                 $sort = $_GET['sort'] ?? 'default';
@@ -140,19 +115,6 @@
             ?>
             </tbody>
 
-=======
-                $fetchQuery= "select * from `user_data`";
-                $fetchResult= mysqli_query($conn,$fetchQuery);
-                if(mysqli_num_rows($fetchResult)> 0)
-                {
-                    while($fetchData= mysqli_fetch_assoc($fetchResult))
-                    {
-                        echo "<tr><td>".$fetchData["id"]."</td><td>".$fetchData["name"]."</td><td>".$fetchData["phone_no"]."</td><td>".$fetchData["email_id"]."</td><td>".$fetchData["role"]."</td><td><button>Edit</button></td></tr>";
-                    }
-                }
-            ?>
-                </tbody>
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
             </table>
         </section>
     </main>

@@ -17,10 +17,7 @@
     <title>Home Page | Groceryz</title>
     <link rel="icon" type="image/x-icon" href="../pictures/app_logo.png" sizes="64X64">
     <link rel="stylesheet" href="css/common.css">
-<<<<<<< HEAD
     <link rel="stylesheet" href="css/adminHomePage.css">
-=======
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -39,7 +36,6 @@
             </ul>
         </nav>
     </header>
-<<<<<<< HEAD
 
     <main>
         <section id="addItemSection">
@@ -87,11 +83,6 @@
         </section>
     </main>
 
-=======
-    <main>
-    
-    </main>
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
     <footer>
         <section class="socialMedia">
             <div>
@@ -139,9 +130,6 @@
             Designed by- Kalpesh Talesha
         </p>
     </footer>
-<<<<<<< HEAD
     <script src="js/adminHomePage.js"></script>
-=======
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
 </body>
 </html>

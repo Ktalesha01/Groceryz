@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .itemDescription {
     background-color: #e6f4ea;
     padding: 20px;
@@ -97,72 +96,3 @@
 #lhBtn button:hover {
     color: #40916c;
 }
-=======
-*{
-    padding: 0%;
-    margin: 0px;
-    box-sizing: border-box;
-}
-header{
-  /*  background-image: linear-gradient(lightblue,rgb(0, 115, 255));
-  */  display: flex;
-    justify-content: center;
-    border-bottom: 2px solid blue;
-}
-header>figure{
-    padding-left:20px;
-    width: 35%;
-    justify-content: flex-start;
-    align-items: center;
-}
-header>nav{
-    display: flex;
-    width: 65%;
-    justify-content: center;
-    align-items: center;
-}
-header>nav>ul{
-    display: flex;
-    width: 100%;
-    justify-content:space-evenly;
-    align-items: center;
-    flex-direction: row;
-}
-header>nav>ul>li{
-    font-size: larger;
-    color: blue;
-}
-
-
-
-
-
-
-footer{
-    display: flex;
-    justify-content: center;
-    border-top: blue 2px solid;
-    color: blue;
-    flex-direction: column;
-}
-.socialMedia{
-    display: flex;
-    justify-content: space-between;
-    justify-items: center;
-}
-footer>nav{
-    display: flex;
-    justify-content: center;
-}
-footer>nav>ul{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-footer>p{
-    text-align: center;
-}
-
-
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669

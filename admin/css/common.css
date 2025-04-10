@@ -61,13 +61,10 @@ main {
     padding: 20px;
     text-align: center;
     min-height: 70vh;
-<<<<<<< HEAD
     background-image: url("../../pictures/bg_image.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-=======
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
 }
 
 main section {

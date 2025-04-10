@@ -7,7 +7,6 @@
         echo "<script>location.href='../index.php'</script>";
     }
 
-<<<<<<< HEAD
     $status = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,8 +25,6 @@
             $status = "error";
         }
     }
-=======
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +55,6 @@
         </nav>
     </header>
     <main>
-<<<<<<< HEAD
         <?php if (isset($_GET["status"]) && $_GET["status"] == "success"): ?>
             <div class="success-banner">
                 ✅ Your message has been sent successfully!
@@ -120,62 +116,6 @@
         </div>
     </main>
 
-=======
-    <div class="header1">
-    <h1>Contact Us</h1>
-    <p>We’d Love to Hear From You!</p>
-</div>
-
-<div class="container">
-
-    <h2>Contact Information</h2>
-    <ul class="contact-info">
-        <li><i class="fas fa-envelope"></i> Email: <a href="mailto:support@groceryz.com">support@groceryz.com</a></li>
-        <li><i class="fas fa-phone"></i> Phone: +1 (555) 123-4567</li>
-        <li><i class="fas fa-map-marker-alt"></i> Address:  
-            Groceryz Inc., 123 Greenway Lane, Suite 100, Seattle, WA 98101, USA</li>
-    </ul>
-
-    <h2>Support Hours</h2>
-    <p><strong>Monday – Friday:</strong> 9:00 AM – 6:00 PM (PST)</p>
-    <p><strong>Saturday – Sunday:</strong> Closed</p>
-
-    <h2>Send Us a Message</h2>
-    <form class="contact-form">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <input type="text" placeholder="Subject" required>
-        <textarea placeholder="Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-
-    <h2>Connect With Us</h2>
-    <div class="social-links">
-        <a href="https://github.com/Ktalesha01" target="_blank">
-            <i class="fa-brands fa-github"></i>
-            <p>GitHub</p>
-        </a>
-        <a href="mailto:kalpeshtalesha01official@gmail.com">
-            <i class="fa-regular fa-envelope"></i>
-            <p>Mail</p>
-        </a>
-        <a href="https://www.linkedin.com/in/kalpesh-talesha-881b75311/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-            <p>LinkedIn</p>
-        </a>
-        <a href="https://www.instagram.com/ktalesha01.official/?next=%2F&hl=en" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-            <p>Instagram</p>
-        </a>
-        <a href="https://wa.me/+917208495230" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-            <p>WhatsApp</p>
-        </a>
-    </div>
-
-</div>
-    </main>
->>>>>>> eb5b57c50732e4827f5aefa535027a4cc1f72669
     <footer>
         <section class="socialMedia">
             <div>
