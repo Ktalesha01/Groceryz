@@ -21,19 +21,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <?php
-        $errorMessage = "";
-        if(isset($_POST["updateDetailsBtn"])){
-            $updatedName = $_POST["updatedName"];
-            $photo = $_Files["updatedProfilePic"]["tmp_name"];
-            $photoData = file_get_contents($photo);
-            $photoData = base64_encode($photoData);
-            $updatedPhone = $_POST["updatedPhone"];
-            $updatedEmail = $_POST["updatedEmail"];
+<?php
+    session_start();
 
+    if (!isset($_SESSION["username"])) {
+        echo "<script>location.href='../index.php'</script>";
+        exit();
+    }
 
+    $errorMessage = "";
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["updateDetailsBtn"])) {
+        $updatedName = $_POST["updatedName"];
+        $updatedPhone = $_POST["updatedPhone"];
+        $updatedEmail = $_POST["updatedEmail"];
+
+        // ✅ Handle file upload safely
+        if (isset($_FILES["updatedProfilePic"]) && $_FILES["updatedProfilePic"]["error"] === 0) {
+            $photoTmp = $_FILES["updatedProfilePic"]["tmp_name"];
+            $photoData = file_get_contents($photoTmp);
+            $photoData = base64_encode($photoData); // You can store this in DB
+        } else {
+            $photoData = ""; // or keep existing one from DB
         }
-    ?>
+
+        // Store data in session temporarily for confirmation page
+        $_SESSION["updated_name"] = $updatedName;
+        $_SESSION["updated_phone"] = $updatedPhone;
+        $_SESSION["updated_email"] = $updatedEmail;
+        $_SESSION["updated_profile"] = $photoData;
+
+        // ✅ Redirect to password confirmation
+        echo "<script>location.href='confirmPassword.php'</script>";
+        exit();
+    }
+?>
 
     <section class="changeDetailsSection">
         <div>
@@ -42,7 +64,7 @@
         <div id="formName">
             <h2>Change User Details</h2>
         </div>
-        <form id="changeDetailsForm" action="confirmPassword.php" method="POST" enctype="multipart/form-data">
+        <form id="changeDetailsForm" action="changeDetails.php" method="POST" enctype="multipart/form-data">
             <div class="maindiv">
                 <div>
                     <label for="updatedName">Name: </label>

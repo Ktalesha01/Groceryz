@@ -1,12 +1,59 @@
 <?php
-    session_start();
+session_start();
+require '../php/databaseConnect.php'; // make sure this connects to your DB
 
-    if(isset($_SESSION["username"])){
-    }
-    else{
-        echo "<script>location.href='../index.php'</script>";
-    }
+if (!isset($_SESSION["username"])) {
+    echo "<script>location.href='../index.php'</script>";
+    exit();
+}
 
+$errorMessage = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"])) {
+    $enteredPassword = $_POST["passwordConfirmation"];
+    $phone = $_SESSION["phone"];
+    $email = $_SESSION["email"];
+
+    // Fetch current hashed password from DB
+    $query = "SELECT password FROM users WHERE phone_no = '$phone' AND email_id = '$email'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $hashedPassword = $row["password"];
+
+        if (password_verify($enteredPassword, $hashedPassword)) {
+            // Password correct, now update
+            $updatedName = $_SESSION["updated_name"];
+            $updatedPhone = $_SESSION["updated_phone"];
+            $updatedEmail = $_SESSION["updated_email"];
+            $profileData = $_SESSION["updated_profile"];
+
+            // Prepare update query
+            if (!empty($profileData)) {
+                $updateQuery = "UPDATE users SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail', `profile_pic`='$profileData' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+            } else {
+                $updateQuery = "UPDATE users SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+            }
+
+            if (mysqli_query($conn, $updateQuery)) {
+                // Update session values
+                $_SESSION["username"] = $updatedName;
+                $_SESSION["phone"] = $updatedPhone;
+                $_SESSION["email"] = $updatedEmail;
+
+                echo "<script>alert('Details updated successfully!'); location.href='dashboard.php';</script>";
+                exit();
+            } else {
+                $errorMessage = "Failed to update details. Try again.";
+            }
+        } else {
+            $errorMessage = "Incorrect password. Please try again.";
+        }
+    } else {
+        $errorMessage = "User not found.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
