@@ -1,13 +1,16 @@
 <?php
     session_start();
 
-    if(isset($_SESSION["username"])){
-    }
-    else{
+    if (!isset($_SESSION["username"])) {
         echo "<script>location.href='../index.php'</script>";
+        exit();
     }
 
     $status = "";
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require '../vendor/autoload.php'; 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $to = "kalpeshtalesha01official@gmail.com"; 
@@ -19,10 +22,29 @@
         $fullMessage = "From: $name <$email>\n\n$message";
         $headers = "From: $email";
 
-        if (mail($to, $subject, $fullMessage, $headers)) {
-            $status = "success";
-        } else {
-            $status = "error";
+
+        $mail = new PHPMailer(true); 
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; 
+            $mail->SMTPAuth = true;
+            $mail->Username = 'kalpeshtalesha01.official@gmail.com'; 
+            $mail->Password = 'apfr zgmk qpmb ymng'; 
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom($email, $name);
+            $mail->addAddress($to);
+
+            $mail->isHTML(false);
+            $mail->Subject = $subject;
+            $mail->Body    = $fullMessage;
+
+            if ($mail->send()) {
+                $status = "success";
+            }
+        } catch (Exception $e) {
+            $status = "error: " . $mail->ErrorInfo;
         }
     }
 ?>
@@ -55,15 +77,15 @@
         </nav>
     </header>
     <main>
-        <?php if (isset($_GET["status"]) && $_GET["status"] == "success"): ?>
-            <div class="success-banner">
-                ✅ Your message has been sent successfully!
-            </div>
-        <?php elseif (isset($_GET["status"]) && $_GET["status"] == "error"): ?>
-            <div class="error-banner">
-                ❌ Something went wrong. Please try again.
-            </div>
-        <?php endif; ?>
+        <?php if (isset($status) && $status == "success"): 
+                $_POST["name"] = $_POST["email"] = $_POST["subject"] = $_POST["message"] = "";
+                echo "<script>alert(`✅ Your message has been sent successfully!`)</script>";
+            
+         elseif (isset($status) && $status == "error"): 
+            
+                echo "<script>alert(`❌ Something went wrong. Please try again.`)</script>";
+            
+         endif; ?>
 
         <div class="mainDiv">
             <div id="subDiv1">

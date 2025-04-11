@@ -41,7 +41,7 @@
                     <p><?php echo $errorMessage;?></p>
                 </div>
                 <div>
-                    <p><a href="forgetPassword.php">Forget Password?</a></p>
+                    <p><a href="forgotPassword.php">Forget Password?</a></p>
                 </div>
                 <div class="formBtns">
                     <button type="submit" id="confirmUpdateDetails" name="confirmUpdateDetails">Confirm</button>
