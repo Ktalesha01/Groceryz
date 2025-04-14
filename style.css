@@ -152,4 +152,9 @@ p{
 #errorMessage{
     color: red;
     text-align: center;
+    margin: 0;
+}
+#rerrorMessage{
+    color: red;
+    text-align: center;
 }

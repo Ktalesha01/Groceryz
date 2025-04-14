@@ -4,7 +4,13 @@ let closeBtn = document.querySelector("#closeBtn");
 let confirmUpdateDetails = document.querySelector("#confirmUpdateDetails");
 
 closeBtn.addEventListener("click",()=>{
-    window.location = "changeDetails.php";
+    if (document.referrer.includes("changeDetails.php")) {
+        window.location = "changeDetails.php";
+    }
+    else if(document.referrer.includes("changePassword.php")){
+        window.location = "changePassword.php";
+    }
+    
 })
 
 

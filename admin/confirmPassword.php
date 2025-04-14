@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"
     $email = $_SESSION["email"];
 
     // Fetch current hashed password from DB
-    $query = "SELECT password FROM users WHERE phone_no = '$phone' AND email_id = '$email'";
+    $query = "SELECT password FROM user_data WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -31,9 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"
 
             // Prepare update query
             if (!empty($profileData)) {
-                $updateQuery = "UPDATE users SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail', `profile_pic`='$profileData' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+                $updateQuery = "UPDATE user_data SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail', `profile_pic`='$profileData' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
             } else {
-                $updateQuery = "UPDATE users SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+                $updateQuery = "UPDATE user_data SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
             }
 
             if (mysqli_query($conn, $updateQuery)) {
@@ -68,9 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <?php
-        $errorMessage= "";
-    ?>
     <section class="confirmPasswordSection">
         <div>
             <button id="closeBtn" type="button"><i class="fa-solid fa-xl fa-xmark"></i></button>
@@ -88,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"
                     <p><?php echo $errorMessage;?></p>
                 </div>
                 <div>
-                    <p><a href="forgotPassword.php">Forget Password?</a></p>
+                    <p><a href="forgotPassword.php">Forgot Password?</a></p>
                 </div>
                 <div class="formBtns">
                     <button type="submit" id="confirmUpdateDetails" name="confirmUpdateDetails">Confirm</button>

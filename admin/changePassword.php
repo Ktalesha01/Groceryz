@@ -35,11 +35,11 @@
             <div class="maindiv">
                 <div>
                     <label for="updatedPassword">New Password:</label>
-                    <input type="password" name="updatedPassword" id="updatedPassword">
+                    <input type="password" name="updatedPassword" id="updatedPassword" required>
                 </div>
                 <div>
                     <label for="updatedConfirmPassword">Confirm Password:</label>
-                    <input type="password" name="updatedConfirmPassword" id="updatedConfirmPassword">
+                    <input type="password" name="updatedConfirmPassword" id="updatedConfirmPassword" required>
                 </div>
                 <div class="errorMessage">
                     <p><?php echo $errorMessage;?></p>

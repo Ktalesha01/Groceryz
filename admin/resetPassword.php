@@ -1,19 +1,42 @@
 <?php
 session_start();
 
+// Check if OTP was verified
+if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
+    header("Location: forgotPassword.php");
+    exit();
+}
+
+$passwordError = '';
+$successMessage = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $newPassword = htmlspecialchars($_POST["newPassword"]);
-    $confirmPassword = htmlspecialchars($_POST["confirmPassword"]);
+    $newPassword = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password'];
 
-    if ($newPassword == $confirmPassword) {
-        // Save the new password (for testing purposes, save it to session)
-        $_SESSION['new_password'] = $newPassword;
-
-        // Redirect to login page (or any success page)
-        header("Location: login.php");
-        exit();
+    if ($newPassword !== $confirmPassword) {
+        $passwordError = "Passwords do not match.";
     } else {
-        $errorMessage = "Passwords do not match. Please try again.";
+        // Hash the password
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        // Connect to DB
+        include '../php/databaseConnect.php'; // DB connection
+
+        $email = $_SESSION['otp_email']; // Retrieved from session
+        $sql = "UPDATE user_data SET password = '$hashedPassword' WHERE email_id = '$email'";
+
+        if (mysqli_query($conn, $sql)) {
+            $successMessage = "Password reset successful. Redirecting to login page...";
+            echo "<script>
+                alert(`$successMessage`);
+                window.location.href = '../index.php';
+            </script>";
+            session_destroy();
+            exit();
+        } else {
+            $passwordError = "Error updating password. Please try again.";
+        }
     }
 }
 ?>
@@ -22,24 +45,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password | Groceryz</title>
 </head>
 <body>
     <h2>Reset Your Password</h2>
-    <form action="" method="POST">
-        <label for="newPassword">Enter New Password:</label>
-        <input type="password" name="newPassword" required>
-        <br>
-        <label for="confirmPassword">Confirm New Password:</label>
-        <input type="password" name="confirmPassword" required>
-        <br>
-        <button type="submit">Reset Password</button>
-    </form>
-    <?php
-    if (isset($errorMessage)) {
-        echo "<p style='color: red;'>$errorMessage</p>";
-    }
-    ?>
+        <form method="POST">
+            <label for="password">New Password:</label><br>
+            <input type="password" name="password" required placeholder="Enter new password"><br>
+
+            <label for="confirm_password">Confirm Password:</label><br>
+            <input type="password" name="confirm_password" required placeholder="Confirm new password"><br><br>
+            <p><?php echo $passwordError?></p>
+            <button type="submit">Reset Password</button>
+        </form>
 </body>
 </html>
+

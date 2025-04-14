@@ -73,6 +73,13 @@
             <div></div>
         </section>
 
+        <section class="logout">
+            <span id="logout">
+                <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+                <p>Logout</p>
+            </span>
+        </section>
+
     </main>
 
 

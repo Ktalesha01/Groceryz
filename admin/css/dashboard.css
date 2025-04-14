@@ -55,3 +55,24 @@
     border-bottom: #1e8c4e 2px solid;
     border-radius: 5vh;
 }
+
+.logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(250, 27, 27);
+}
+
+.logout span{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.logout span i{
+    padding: 2vh 1vh 2vh 2vh;
+}
+
+.logout span p{
+    font-size: larger;
+}
