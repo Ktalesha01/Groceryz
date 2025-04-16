@@ -32,6 +32,7 @@ if (isset($_POST["loginSubmit"])) {
         $row = mysqli_fetch_assoc($result);
 
         if (password_verify($password, $row['password'])) {
+            $_SESSION['user_id'] = (int)$row['id'];
             $_SESSION['username'] = $row['name'];
             $_SESSION['phone'] = $row['phone_no'];
             $_SESSION['email'] = $row['email_id'];
@@ -109,11 +110,11 @@ if (isset($_POST["signUpSubmit"])) {
         </section>
         <section class="signUpFormSection">
             <form id="signUpForm" name="signUpForm" action="" method="post">
-                <input type="text" name="username" id="username" placeholder="Username...">
-                <input type="number" name="phone" id="phone" placeholder="Phone...">
-                <input type="email" name="email" id="email" placeholder="Email Id...">
-                <input type="password" name="password" id="password" placeholder="Password...">
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password...">
+                <input type="text" name="username" id="username" placeholder="Username..." required>
+                <input type="number" name="phone" id="phone" placeholder="Phone..." required>
+                <input type="email" name="email" id="email" placeholder="Email Id..." required>
+                <input type="password" name="password" id="password" placeholder="Password..." required>
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password..." required>
                 <p id="rerrorMessage"><?php echo $errorMessage;?></p>
                 <button id="signUpSubmit" name="signUpSubmit" type="submit">SignUp</button>
             </form>

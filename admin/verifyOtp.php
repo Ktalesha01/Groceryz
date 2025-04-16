@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="maindiv">
                 <div>
                     <label for="otp">Enter the OTP sent to your email:</label><br>
-                    <input type="text" name="otp" required pattern="\d{6}" placeholder="6-digit OTP"><br><br>
+                    <input type="text" name="otp" required pattern="\d{6}" placeholder="6-digit OTP" autofocus><br><br>
                 </div>
                 <div class="errorMessage">
                     <p><?php echo $otpError;?></p>

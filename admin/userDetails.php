@@ -77,7 +77,7 @@
 
                 if (!empty($search)) {
                     $searchSafe = mysqli_real_escape_string($conn, $search);
-                    $fetchQuery .= " WHERE name LIKE '%$searchSafe%' OR email_id LIKE '%$searchSafe%'";
+                    $fetchQuery .= " WHERE name LIKE '%$searchSafe%' OR email_id LIKE '%$searchSafe%' OR phone_no LIKE '%$searchSafe%'";
                 }
 
                 switch ($sort) {

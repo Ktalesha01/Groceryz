@@ -46,18 +46,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Reset Password | Groceryz</title>
+    <link rel="icon" type="image/x-icon" href="../pictures/app_logo.png" sizes="64X64">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/resetPassword.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2>Reset Your Password</h2>
-        <form method="POST">
-            <label for="password">New Password:</label><br>
-            <input type="password" name="password" required placeholder="Enter new password"><br>
-
-            <label for="confirm_password">Confirm Password:</label><br>
-            <input type="password" name="confirm_password" required placeholder="Confirm new password"><br><br>
-            <p><?php echo $passwordError?></p>
-            <button type="submit">Reset Password</button>
+<section class="resetPasswordSection">
+        <div>
+            <button id="closeBtn" type="button"><i class="fa-solid fa-xl fa-xmark"></i></button>
+        </div>
+        <div id="formName">
+            <h2>Reset Your Password</h2>
+        </div>
+        <form id="resetPasswordForm" action="" method="POST">
+            <div class="maindiv">
+                <div>
+                    <label for="password">New Password:</label><br>
+                    <input type="password" name="password" required placeholder="Enter new password"><br>
+                </div>
+                <div>
+                    <label for="confirm_password">Confirm Password:</label><br>
+                    <input type="password" name="confirm_password" required placeholder="Confirm new password">
+                </div>
+                <div class="errorMessage">
+                    <p><?php echo $passwordError;?></p>
+                </div>
+                <div class="formBtns">
+                    <button type="submit" id="resetPasswordBtn" name="resetPasswordBtn">Reset Password</button>
+                </div>
+            </div>
         </form>
+    </section>
+    <script src="js/resetPassword.js"></script>
+
 </body>
 </html>
 

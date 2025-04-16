@@ -8,52 +8,91 @@ if (!isset($_SESSION["username"])) {
 }
 
 $errorMessage = "";
+$phone = $_SESSION["phone"];
+$email = $_SESSION["email"];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"])) {
-    $enteredPassword = $_POST["passwordConfirmation"];
-    $phone = $_SESSION["phone"];
-    $email = $_SESSION["email"];
+if($_SESSION['working_page']=="changeDetails")
+{
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"])) {
+        $enteredPassword = $_POST["passwordConfirmation"];
 
-    // Fetch current hashed password from DB
-    $query = "SELECT password FROM user_data WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
-    $result = mysqli_query($conn, $query);
+        // Fetch current hashed password from DB
+        $query = "SELECT password FROM user_data WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+        $result = mysqli_query($conn, $query);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $hashedPassword = $row["password"];
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $hashedPassword = $row["password"];
 
-        if (password_verify($enteredPassword, $hashedPassword)) {
-            // Password correct, now update
-            $updatedName = $_SESSION["updated_name"];
-            $updatedPhone = $_SESSION["updated_phone"];
-            $updatedEmail = $_SESSION["updated_email"];
-            $profileData = $_SESSION["updated_profile"];
+            if (password_verify($enteredPassword, $hashedPassword)) {
+                // Password correct, now update
+                $updatedName = $_SESSION["updated_name"];
+                $updatedPhone = $_SESSION["updated_phone"];
+                $updatedEmail = $_SESSION["updated_email"];
+                $profileData = $_SESSION["updated_profile"];
 
-            // Prepare update query
-            if (!empty($profileData)) {
-                $updateQuery = "UPDATE user_data SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail', `profile_pic`='$profileData' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+                // Prepare update query
+                if (!empty($profileData)) {
+                    $updateQuery = "UPDATE user_data SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail', `profile_pic`='$profileData' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+                } else {
+                    $updateQuery = "UPDATE user_data SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+                }
+
+                if (mysqli_query($conn, $updateQuery)) {
+                    // Update session values
+                    $_SESSION["username"] = $updatedName;
+                    $_SESSION["phone"] = $updatedPhone;
+                    $_SESSION["email"] = $updatedEmail;
+
+                    echo "<script>alert('Details updated successfully!'); location.href='dashboard.php';</script>";
+                    exit();
+                } else {
+                    $errorMessage = "Failed to update details. Try again.";
+                }
             } else {
-                $updateQuery = "UPDATE user_data SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
-            }
-
-            if (mysqli_query($conn, $updateQuery)) {
-                // Update session values
-                $_SESSION["username"] = $updatedName;
-                $_SESSION["phone"] = $updatedPhone;
-                $_SESSION["email"] = $updatedEmail;
-
-                echo "<script>alert('Details updated successfully!'); location.href='dashboard.php';</script>";
-                exit();
-            } else {
-                $errorMessage = "Failed to update details. Try again.";
+                $errorMessage = "Incorrect password. Please try again.";
             }
         } else {
-            $errorMessage = "Incorrect password. Please try again.";
+            $errorMessage = "User not found.";
         }
-    } else {
-        $errorMessage = "User not found.";
     }
 }
+else if($_SESSION['working_page']=="changePassword")
+{
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"])) 
+    {
+        $enteredPassword = $_POST["passwordConfirmation"];
+
+        // Fetch current hashed password from DB
+        $query = "SELECT password FROM user_data WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result && mysqli_num_rows($result) > 0) 
+        {
+            $row = mysqli_fetch_assoc($result);
+            $hashedPassword = $row["password"];
+
+            if (password_verify($enteredPassword, $hashedPassword)) 
+            {
+                $newPassword = $_SESSION['newPassword'];
+                $sql = "UPDATE user_data SET password = '$newPassword' WHERE phone_no = '$phone' AND email_id = '$email'";
+
+                // Execute the query
+                if (mysqli_query($conn, $sql)) {
+                    $successMessage = "Password updated successfully.";
+                    echo "<script>
+                        alert('$successMessage');
+                        window.location.href = 'dashboard.php'; // Redirect to dashboard
+                    </script>";
+                    exit();
+                } else {
+                    $errorMessage = "Error updating password. Please try again.";
+                }
+            }
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -93,6 +132,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"
             </div>
         </form>
     </section>
+    <script>
+        let workingPage = <?php echo json_encode($_SESSION['working_page']); ?>;
+    </script>
     <script src="js/confirmPassword.js"></script>
 </body>
 </html>

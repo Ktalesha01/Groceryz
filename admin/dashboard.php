@@ -1,12 +1,26 @@
 <?php
     session_start();
 
-    if(isset($_SESSION["username"])){
-    }
-    else{
+    if (!isset($_SESSION["username"])) {
         echo "<script>location.href='../index.php'</script>";
+        exit();
     }
 
+    include "../php/databaseConnect.php";
+    $phone = $_SESSION["phone"];
+    $email = $_SESSION["email"];
+
+    $sql = "SELECT * FROM user_data WHERE phone_no = '$phone' and email_id = '$email'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        if (!empty($row["profile_pic"])) {
+            $base64ProfilePic = "data:image/jpeg;base64," . $row["profile_pic"];
+        } else {
+            $base64ProfilePic = "../pictures/profile_pic.jpg";
+        }
+    }
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +55,7 @@
     <main>
         <section class="userInfoSection">
             <div class="profilePic">
-                <img src="../pictures/profile_pic.jpg" alt="" width=100%>
+                <img src="<?php echo $base64ProfilePic; ?>" alt="Profile Picture" width="100%">
             </div>
             <div class="userInfo">
                 <p id="userName"><?php echo $_SESSION["username"] ?></p>

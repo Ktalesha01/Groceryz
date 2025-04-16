@@ -1,12 +1,10 @@
 <?php
-    session_start();
+session_start();
 
-    if(isset($_SESSION["username"])){
-    }
-    else{
-        echo "<script>location.href='../index.php'</script>";
-    }
-
+if (!isset($_SESSION["username"])) {
+    header("Location: ../index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +47,9 @@
         $_SESSION["updated_phone"] = $updatedPhone;
         $_SESSION["updated_email"] = $updatedEmail;
         $_SESSION["updated_profile"] = $photoData;
-
+        $_SESSION["working_page"] = "changeDetails";
         // ✅ Redirect to password confirmation
-        echo "<script>location.href='confirmPassword.php'</script>";
+        header("Location: confirmPassword.php");
         exit();
     }
 ?>

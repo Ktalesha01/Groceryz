@@ -1,14 +1,29 @@
 <?php
-    session_start();
+session_start();
 
-    if(isset($_SESSION["username"])){
-    }
-    else{
-        echo "<script>location.href='../index.php'</script>";
-    }
+if (!isset($_SESSION["username"])) {
+    echo "<script>location.href='../index.php'</script>";
+    exit();
+}
 
+$errorMessage = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $updatedPassword = $_POST['updatedPassword'];
+    $updatedConfirmPassword = $_POST['updatedConfirmPassword'];
+
+    if ($updatedPassword !== $updatedConfirmPassword) {
+        $errorMessage = "Passwords do not match.";
+    } else {
+        // Hash the password
+        $hashedPassword = password_hash($updatedPassword, PASSWORD_DEFAULT);
+        $_SESSION['newPassword'] = $hashedPassword;
+        $_SESSION["working_page"] = "changePassword";
+        header("Location: confirmPassword.php");
+        exit();
+    }
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +36,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <?php
-        $errorMessage = "";
-    ?>
     <section class="changePasswordSection">
         <div>
             <button id="closeBtn" type="button"><i class="fa-solid fa-xl fa-xmark"></i></button>
@@ -31,7 +43,7 @@
         <div id="formName">
             <h2>Change Password</h2>
         </div>
-        <form id="changePasswordForm" action="confirmPassword.php" method="POST">
+        <form id="changePasswordForm" action="" method="POST">
             <div class="maindiv">
                 <div>
                     <label for="updatedPassword">New Password:</label>
@@ -45,7 +57,7 @@
                     <p><?php echo $errorMessage;?></p>
                 </div>
                 <div class="formBtns">
-                    <button id="passwordChangeBtn" name="passwordChangeBtn">Update</button>
+                    <button type="submit" id="passwordChangeBtn" name="passwordChangeBtn">Update</button>
                 </div>
             </div>
         </form>
