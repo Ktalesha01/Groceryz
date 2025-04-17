@@ -9,145 +9,170 @@ function toggleDownloadMenu() {
     menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
 }
 
-// Close menus when clicking outside
-window.onclick = function(event) {
-    const menu = document.getElementById("menuList");
-    const downloadMenu = document.getElementById("downloadMenuList");
-
-    if (!event.target.matches('.menu button')) {
-        if (menu.style.display === "block") {
-            menu.style.display = "none";
-        }
-    }
-
-    if (!event.target.matches('#downloadBtn') && !event.target.matches('#downloadMenuList button')) {
-        if (downloadMenu.style.display === "block") {
-            downloadMenu.style.display = "none";
-        }
-    }
-}
-// Create a new list (reset the current list)
-function newList() {
-    document.getElementById("currentListName").innerText = "";
-    document.getElementById("listDisplay").innerHTML = "";
-    showListNamePopup();
-}
-
-// Open an existing list (this can be modified to load data from server)
-function openList() {
-    alert("Open an existing list functionality to be implemented.");
-}
-
-// Rename the current list
-function renameList() {
-    const newListName = prompt("Enter a new name for the list:", document.getElementById("currentListName").innerText);
-    if (newListName && newListName.trim() !== "") {
-        document.getElementById("currentListName").innerText = newListName;
+function markDone(checkbox) {
+    if (checkbox.checked) {
+        checkbox.parentElement.parentElement.style.textDecoration = "line-through";
+    } else {
+        checkbox.parentElement.parentElement.style.textDecoration = "none";
     }
 }
 
-// Share the current list (functionality can be implemented as per requirements)
-function shareList() {
-    alert("Share functionality to be implemented.");
-}
-
-// Close the current list
-function closeList() {
-    document.getElementById("groceryApp").style.display = "none";
-    showListNamePopup();
-}
-
-// Add an item to the list
-function addItem(event) {
-    event.preventDefault();
-    
-    const itemName = document.getElementById("itemName").value;
-    const itemType = document.getElementById("itemType").value;
-    const itemQty = document.getElementById("itemQty").value;
-
-    if (!itemName || !itemType || !itemQty) {
-        alert("All fields are required.");
-        return;
-    }
-
-    // Create a new table row for the item
-    const row = document.createElement("tr");
-
-    const nameCell = document.createElement("td");
-    nameCell.textContent = itemName;
-
-    const typeCell = document.createElement("td");
-    typeCell.textContent = itemType;
-
-    const qtyCell = document.createElement("td");
-    qtyCell.textContent = itemQty;
-
-    const actionCell = document.createElement("td");
-
-    // Add edit, mark as done, and remove buttons
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.onclick = () => editItem(row);
-
-    const doneBtn = document.createElement("button");
-    doneBtn.textContent = "Done";
-    doneBtn.onclick = () => markAsDone(row);
-
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "Remove";
-    removeBtn.onclick = () => removeItem(row);
-
-    actionCell.append(editBtn, doneBtn, removeBtn);
-
-    row.append(nameCell, typeCell, qtyCell, actionCell);
-
-    // Append the row to the list
-    document.getElementById("listDisplay").querySelector("table").append(row);
-
-    // Clear the input fields
-    document.getElementById("itemName").value = "";
-    document.getElementById("itemType").value = "";
-    document.getElementById("itemQty").value = "";
-}
-
-// Edit an existing item
-function editItem(row) {
-    const name = row.children[0].textContent;
-    const type = row.children[1].textContent;
-    const qty = row.children[2].textContent;
-
+function editItem(id, name, qty) {
     const newName = prompt("Edit item name:", name);
-    const newType = prompt("Edit item type:", type);
-    const newQty = prompt("Edit item quantity:", qty);
+    const newQty = prompt("Edit quantity:", qty);
 
-    if (newName && newType && newQty) {
-        row.children[0].textContent = newName;
-        row.children[1].textContent = newType;
-        row.children[2].textContent = newQty;
+    if (newName !== null && newQty !== null) {
+        fetch("../php/updateItem.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `item_id=${id}&item_name=${encodeURIComponent(newName)}&item_qty=${newQty}`
+        })
+        .then(res => res.text())
+        .then(data => {
+            if (data.trim() === "success") location.reload();
+            else alert("Failed to update item.");
+        });
     }
 }
 
-// Mark an item as done
-function markAsDone(row) {
-    row.style.backgroundColor = "#d4edda"; // Light green for completed
+function deleteItem(id) {
+    if (confirm("Are you sure you want to delete this item?")) {
+        fetch("../php/deleteItem.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `item_id=${id}`
+        })
+        .then(res => res.text())
+        .then(data => {
+            if (data.trim() === "success") location.reload();
+            else alert("Failed to delete item.");
+        });
+    }
 }
 
-// Remove an item from the list
-function removeItem(row) {
-    row.remove();
+function renameList() {
+    const newName = prompt("Enter new list name:");
+    if (newName && newName.trim() !== "") {
+        fetch("../php/renameList.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `new_name=${encodeURIComponent(newName.trim())}`
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() === "success") {
+                document.getElementById("currentListName").textContent = newName.trim();
+                alert("List renamed successfully!");
+            } else {
+                alert("Failed to rename the list.");
+            }
+        });
+    }
 }
 
-// Download the grocery list as Excel
+function newList() {
+    window.location.href = "adminHomePage.php";
+}
+
+function openList() {
+    const listDropdown = document.getElementById("list");
+    alert("Select List name form dropdown to Open List.");
+    listDropdown.focus();
+
+    listDropdown.style.outline = "2px solid #4CAF50";
+    setTimeout(() => {
+        listDropdown.style.outline = "";
+    }, 1000);
+}
+
+function closeList() {
+    fetch("../php/closeList.php")
+        .then(res => res.text())
+        .then(response => {
+            if (response.trim() === "success") {
+                alert("List closed.");
+                window.location.href = "adminHomePage.php";
+            } else {
+                alert("Unable to close list.");
+            }
+        });
+}
+
+function toggleDone(itemId, checkboxElement) {
+    const isDone = checkboxElement.checked ? 1 : 0;
+
+    fetch('../php/updateDoneStatus.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `item_id=${itemId}&is_done=${isDone}`
+    })
+    .then(response => response.text())
+    .then(result => {
+        const row = checkboxElement.closest("tr");
+        if (isDone) {
+            row.style.textDecoration = "line-through";
+        } else {
+            row.style.textDecoration = "none";
+        }
+    });
+}
+
 function downloadListAsExcel() {
-    const table = document.getElementById("listDisplay").querySelector("table");
-    const wb = XLSX.utils.table_to_book(table, { sheet: "Grocery List" });
-    XLSX.writeFile(wb, "grocery_list.xlsx");
+    let wb = XLSX.utils.book_new();
+    let ws_data = [["Item Name", "Item Type", "Quantity"]]; 
+
+    const rows = document.querySelectorAll("#listDisplay table tr");
+    let currentType = "";
+
+    rows.forEach(row => {
+        const cols = row.querySelectorAll("td");
+        if (cols.length === 1) {
+            currentType = cols[0].innerText; // Store item type
+        } else if (cols.length === 3) {
+            const itemName = cols[0].innerText;
+            const qty = cols[1].innerText;
+            ws_data.push([itemName, currentType, qty]); // Swapped order
+        }
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet(ws_data);
+    XLSX.utils.book_append_sheet(wb, ws, "Grocery List");
+
+    const listName = document.getElementById("currentListName").innerText.trim() || "Grocery_List";
+    XLSX.writeFile(wb, `${listName}.xlsx`);
 }
 
-// Download the grocery list as PDF
 function downloadListAsPDF() {
+    const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const table = document.getElementById("listDisplay").querySelector("table");
-    doc.autoTable({ html: table });
-    doc.save("grocery_list.pdf");
+
+    const listName = document.getElementById("currentListName").innerText.trim() || "Grocery List";
+
+    doc.setFontSize(16);
+    doc.text(listName, 14, 20);
+
+    const rows = document.querySelectorAll("#listDisplay table tr");
+    let data = [];
+    let currentType = "";
+
+    rows.forEach(row => {
+        const cols = row.querySelectorAll("td");
+        if (cols.length === 1) {
+            currentType = cols[0].innerText;
+        } else if (cols.length === 3) {
+            const itemName = cols[0].innerText;
+            const qty = cols[1].innerText;
+            data.push([itemName, currentType, qty]); // Swapped order
+        }
+    });
+
+    doc.autoTable({
+        head: [["Item Name", "Item Type", "Quantity"]],
+        body: data,
+        startY: 30
+    });
+
+    doc.save(`${listName}.pdf`);
 }

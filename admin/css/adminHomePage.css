@@ -1,6 +1,28 @@
+.popup-section div{
+    width: 100%;
+}
+#closeBtn{
+    float: right;
+    height: 100%;
+    max-width: 20%;
+    padding: 1vh;
+    background-color: red;
+    border: black 2px solid;
+    border-radius: 1vh;
+}
+
+#closeBtn:hover{
+    background-color: rgb(239, 70, 70);
+}
+
+#closeBtn > i{
+    padding: .5vh;
+}
+
 .popup-section {
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
     z-index: 999;
 }

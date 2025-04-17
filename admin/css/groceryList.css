@@ -5,6 +5,20 @@
     justify-content: space-between;
 }
 
+main select{
+    padding: 7px 14px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: .5vh;
+    outline: none;
+    background-color: #fff;
+    transition: 0.3s;
+}
+main select:focus{
+    border-color: #388e3c;
+    box-shadow: 0 0 5px rgba(56, 142, 60, 0.3);
+}
+
 .itemDescription {
     background-color: #e6f4ea;
     border-radius: 1vh;
