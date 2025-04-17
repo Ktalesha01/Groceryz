@@ -9,6 +9,8 @@
     include "../php/databaseConnect.php";
     $phone = $_SESSION["phone"];
     $email = $_SESSION["email"];
+    $user_id = $_SESSION["user_id"]; // Make sure this is set during login
+
 
     $sql = "SELECT * FROM user_data WHERE phone_no = '$phone' and email_id = '$email'";
     $result = mysqli_query($conn, $sql);
@@ -20,7 +22,64 @@
             $base64ProfilePic = "../pictures/profile_pic.jpg";
         }
     }
-    mysqli_close($conn);
+
+
+    // Fetch recent 5 lists created by user
+    $recentLists = [];
+    $recentQuery = "SELECT * FROM grocery_lists WHERE user_id = '$user_id' ORDER BY created_at DESC LIMIT 10";
+    $recentResult = mysqli_query($conn, $recentQuery);
+
+    while ($row = mysqli_fetch_assoc($recentResult)) {
+        $recentLists[] = $row;
+    }
+
+    $sharedLists = [];
+
+    $recentListsQuery = "SELECT list_id 
+        FROM grocery_lists 
+        ORDER BY created_at DESC
+        LIMIT 10
+    ";
+    
+    $recentListsResult = mysqli_query($conn, $recentListsQuery);
+    
+    $recentListIds = [];
+    while ($row = mysqli_fetch_assoc($recentListsResult)) {
+        $recentListIds[] = $row['list_id'];
+    }
+    
+    if (count($recentListIds) > 0) {
+        $listIds = implode(",", $recentListIds); // Prepare the list IDs for the query
+    
+        $sharedQuery = "SELECT gl.list_name, gl.list_id, sl.permission 
+            FROM shared_lists sl
+            JOIN grocery_lists gl ON sl.list_id = gl.list_id
+            WHERE sl.shared_with_user_id = '$user_id'
+            AND gl.list_id IN ($listIds)
+        ";
+    
+        $sharedResult = mysqli_query($conn, $sharedQuery);
+    
+        while ($row = mysqli_fetch_assoc($sharedResult)) {
+            $sharedLists[] = $row;
+        }
+    }
+
+    $sharedQuery1 = "SELECT gl.list_name, gl.list_id, sl.permission
+    FROM shared_lists sl
+    JOIN grocery_lists gl ON sl.list_id = gl.list_id
+    WHERE sl.shared_by_user_id = '$user_id'
+    AND gl.list_id IN ($listIds)
+";
+
+$sharedResult1 = mysqli_query($conn, $sharedQuery1);
+$sharedLists1 = [];
+
+while ($row1 = mysqli_fetch_assoc($sharedResult1)) {
+    $sharedLists1[] = $row1;
+}
+
+        mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -73,18 +132,64 @@
 
         <section class="recentLists">
             <h2>Recent Lists</h2>
-            <div class="5lists">
-                <div id="list1"></div>
-                <div id="list2"></div>
-                <div id="list3"></div>
-                <div id="list4"></div>
-                <div id="list5"></div>
+            <div class="listGrid">
+                <?php
+                // Loop through the recent lists array and display each list in grid style
+                for ($i = 0; $i < 10; $i++) {
+                    if (!isset($recentLists[$i])) {
+                        break;  // Stop the loop if there are no more lists
+                    }
+                    
+                    echo "<div class='listItem'>";
+                    echo htmlspecialchars($recentLists[$i]['list_name']);
+                    echo "</div>";
+                }                ?>
             </div>
         </section>
 
         <section class="shareingInfo">
-            <h2>Shared Lists</h2>
-            <div></div>
+    <h2>Shared Lists</h2>
+    <?php if (count($sharedLists) === 0): ?>
+        <p>No shared lists available from recent 10.</p>
+    <?php else: ?>
+        <div class="slistGrid">
+            <?php
+            $maxLists = min(10, count($sharedLists)); // Display max 10 lists
+            for ($i = 0; $i < $maxLists; $i++):
+                $list = $sharedLists[$i];
+                $list_id = $list['list_id'];
+                $list_name = htmlspecialchars($list['list_name']);
+                $permission = htmlspecialchars($list['permission']);
+            ?>
+                <a href="groceryList.php?list_id=<?php echo $list_id; ?>" class="listItemLink">
+                    <div class="slistItem">
+                        <?php echo $list_name; ?>
+                        <small>(<?php echo $permission; ?>)</small>
+                    </div>
+                </a>
+            <?php endfor; ?>
+        </div>
+    <?php endif; ?>
+</section>
+
+        <section class="sharedListsSection">
+            <h2>Lists You've Shared</h2>
+            <?php if (count($sharedLists1) > 0): ?>
+                <div class="sharedListGrid">
+                    <?php
+                    $maxShared = min(10, count($sharedLists1));
+                    for ($i = 0; $i < $maxShared; $i++):
+                        $list1 = $sharedLists1[$i];
+                    ?>
+                        <div class="sharedListItem">
+                            <?php echo htmlspecialchars($list1['list_name']); ?>
+                            <small>(Permission: <?php echo ucfirst($list1['permission']); ?>)</small>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            <?php else: ?>
+                <p>You have not shared any lists yet.</p>
+            <?php endif; ?>
         </section>
 
         <section class="logout">

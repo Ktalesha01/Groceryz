@@ -78,3 +78,51 @@
 .logout span p{
     font-size: larger;
 }
+
+.recentLists {
+    padding: 20px;
+    text-align: center;
+}
+
+.listGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 5 columns in each row */
+    gap: 10px; /* Space between items */
+    justify-items: center; /* Center items horizontally */
+}
+
+.slistGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 5 columns in each row */
+    gap: 10px; /* Space between items */
+    justify-items: center; /* Center items horizontally */
+}
+
+.sharedListGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 5 columns in each row */
+    gap: 10px; /* Space between items */
+    justify-items: center; /* Center items horizontally */
+}
+
+
+.listItem,
+.slistItem,
+.sharedListItem {
+    min-width: 35vh;
+    cursor: pointer;
+    font-size: large;
+    border-bottom: 2px solid transparent;
+}
+.listItem:hover,
+.slistItem:hover,
+.sharedListItem:hover {
+    color: #1e8c4e;
+    border-bottom: #1e8c4e 2px solid;
+    border-radius: 5vh;
+}
+
+
+h2 {
+    margin-bottom: 20px;
+}
