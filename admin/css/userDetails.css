@@ -3,6 +3,7 @@ main {
 }
 
 main > section{
+    min-width: 65%;
     padding: 4vh 6vh;
     min-height: 70vh;
 }
@@ -58,7 +59,7 @@ table {
 }
 
 table th, table td {
-    padding: 14px 18px;
+    padding: 1vh 1.5vh;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }

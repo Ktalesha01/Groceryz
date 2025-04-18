@@ -174,18 +174,18 @@ if (isset($_POST['selected_list_id'])) {
                                 while ($items = mysqli_fetch_assoc($result)) {
                                     if ($current_type != $items['item_type']) {
                                         $current_type = $items['item_type'];
-                                        echo "<tr><td colspan='3' style='font-weight: bold; background-color: #e8f5e9;'>" . ucfirst(htmlspecialchars($current_type)) . "</td></tr>";
+                                        echo "<tr style=\"font-size: larger; background-color: #bbe3c6;\"><td colspan='3'><h3>" . ucfirst(htmlspecialchars($current_type)) . "</h3></td></tr>";
                                     }
                                     $is_done = $items['is_done'] ? 'checked' : '';
                                     $row_style = $items['is_done'] ? 'style="text-decoration: line-through;"' : '';
 
-                                    echo "<tr $row_style>
-                                        <td>" . htmlspecialchars($items['item_name']) . "</td>
-                                        <td>" . htmlspecialchars($items['item_qty']) . "</td>
-                                        <td>
-                                            <input type='checkbox' onchange='toggleDone(" . $items['item_id'] . ", this)' $is_done />
-                                            <button onclick='editItem(" . $items['item_id'] . ", \"" . htmlspecialchars($items['item_name']) . "\", \"" . htmlspecialchars($items['item_qty']) . "\")'>✏️</button>
-                                            <button onclick='deleteItem(" . $items['item_id'] . ")'>🗑️</button>
+                                    echo "<tr $row_style style=\"font-size: larger; text-align: left;\">
+                                        <td style=\"width: 55%;padding-left:2vw;\">" . htmlspecialchars($items['item_name']) . "</td>
+                                        <td style=\"width: 25%;\">" . htmlspecialchars($items['item_qty']) . "</td>
+                                        <td style=\"width: 20%;\">
+                                            <input type='checkbox' style='transform: scale(2); margin-right: 10px;' onchange='toggleDone(" . $items['item_id'] . ", this)' $is_done />
+                                            <button style='font-size: .85vw; padding: 4px 8px;' onclick='editItem(" . $items['item_id'] . ", \"" . htmlspecialchars($items['item_name']) . "\", \"" . htmlspecialchars($items['item_qty']) . "\")'>✏️</button>
+                                            <button style='font-size: .85vw; padding: 4px 8px;' onclick='deleteItem(" . $items['item_id'] . ")'>🗑️</button>
                                         </td>
                                     </tr>";
                                 }

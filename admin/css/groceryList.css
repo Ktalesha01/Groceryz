@@ -131,6 +131,7 @@ main select:focus{
 }
 
 .groceryList{
+
     border-radius: 1vh;
     overflow: hidden;
     background-color: #e6f4ea;
@@ -175,11 +176,6 @@ main select:focus{
     color: #388e3c;
 }
 
-.list-display{
-    min-width: 95%;
-    min-height: 50vh;
-}
-
 #download{
     position: relative; 
     display: flex;
@@ -218,4 +214,17 @@ main select:focus{
     background-color: #f5f5f5;
 }
 
+.list-display{
+    box-sizing: border-box;
+
+    min-width: 100%;
+    min-height: 50vh;
+    margin: 0%;
+}
+.list-display table{
+    width: 100%;
+}
+.list-display table tr{
+    width: 100%;
+}
 
