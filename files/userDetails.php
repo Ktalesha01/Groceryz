@@ -6,7 +6,7 @@
     if(isset($_SESSION["username"])){
     }
     else{
-        echo "<script>location.href='../login.php'</script>";
+        echo "<script>location.href='login.php'</script>";
     }
 
 ?>

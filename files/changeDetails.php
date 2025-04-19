@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["username"])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 ?>
@@ -22,7 +22,7 @@ if (!isset($_SESSION["username"])) {
 <?php
 
     if (!isset($_SESSION["username"])) {
-        echo "<script>location.href='../login.php'</script>";
+        echo "<script>location.href='login.php'</script>";
         exit();
     }
 

@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $successMessage = "Password reset successful. Redirecting to login page...";
             echo "<script>
                 alert(`$successMessage`);
-                window.location.href = '../login.php';
+                window.location.href = 'login.php';
             </script>";
             session_destroy();
             exit();

@@ -4,7 +4,7 @@ session_start();
 require "../php/header.php";
 
 if (!isset($_SESSION["username"])) {
-    echo "<script>location.href='../login.php'</script>";
+    echo "<script>location.href='login.php'</script>";
     exit();
 }
 

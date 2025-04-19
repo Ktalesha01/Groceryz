@@ -3,7 +3,7 @@ session_start();
 require '../php/databaseConnect.php'; // make sure this connects to your DB
 
 if (!isset($_SESSION["username"])) {
-    echo "<script>location.href='../login.php'</script>";
+    echo "<script>location.href='login.php'</script>";
     exit();
 }
 

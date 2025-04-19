@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Publisher" content="Kalpesh Talesha">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="icon" type="image/x-icon" href="pictures/app_logo.png" sizes="64X64">
     <title>Groceryz - Grocery List Organization</title>
 </head>
 <body>
 <?php
-require "php/databaseConnect.php";
+require "../php/databaseConnect.php";
 
 function test_input($data){
     return htmlspecialchars(trim($data));
@@ -38,7 +38,7 @@ if (isset($_POST["loginSubmit"])) {
             $_SESSION['email'] = $row['email_id'];
             $_SESSION['role'] = $row['role'];
 
-            header("Location: admin/homePage.php");
+            header("Location: homePage.php");
 
         } else {
             $status = "Incorrect Password";
@@ -97,7 +97,7 @@ if (isset($_POST["signUpSubmit"])) {
                 <input type="text" name="userId" id="userId" placeholder="Phone/ Email..." required>
                 <input type="password" name="password" id="password" placeholder="Password..." required>
                 <p id="errorMessage"><?php echo $status;?></p>
-                <p id="forgetPassword"><a href="admin/forgotPassword.php">Forgot Password?</a></p>
+                <p id="forgetPassword"><a href="forgotPassword.php">Forgot Password?</a></p>
                 <button id="loginSubmit" name="loginSubmit" type="submit">Login</button>
             </form>
              
@@ -116,6 +116,6 @@ if (isset($_POST["signUpSubmit"])) {
             <p>Already have account? <span id="switchToLogin">Login</span></p>
         </section>
     </article>
-    <script type="text/javascript" src="login.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>
