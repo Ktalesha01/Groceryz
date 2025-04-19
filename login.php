@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Publisher" content="Kalpesh Talesha">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
     <link rel="icon" type="image/x-icon" href="pictures/app_logo.png" sizes="64X64">
     <title>Groceryz - Grocery List Organization</title>
 </head>
@@ -38,13 +38,8 @@ if (isset($_POST["loginSubmit"])) {
             $_SESSION['email'] = $row['email_id'];
             $_SESSION['role'] = $row['role'];
 
-            if ($row['role'] == "admin") {
-                header("Location: admin/adminHomePage.php");
-                exit();
-            } else {
-                header("Location: user/homePage.php");
-                exit();
-            }
+            header("Location: admin/homePage.php");
+
         } else {
             $status = "Incorrect Password";
         }
@@ -121,6 +116,6 @@ if (isset($_POST["signUpSubmit"])) {
             <p>Already have account? <span id="switchToLogin">Login</span></p>
         </section>
     </article>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="login.js"></script>
 </body>
 </html>

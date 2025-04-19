@@ -7,7 +7,7 @@ closeBtn.addEventListener("click",()=>{
     if (document.referrer.includes("confirmPassword.php")) {
         window.location = "confirmPassword.php";
     }
-    else if(document.referrer.includes("index.php")){
+    else if(document.referrer.includes("login.php")){
         window.location = "confirmPassword.php";
     }
     

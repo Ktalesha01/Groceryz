@@ -1,15 +1,17 @@
 <?php
     session_start();
 
+    require "../php/header.php";
+
     if (!isset($_SESSION["username"])) {
-        echo "<script>location.href='../index.php'</script>";
+        echo "<script>location.href='../login.php'</script>";
         exit();
     }
 
     include "../php/databaseConnect.php";
     $phone = $_SESSION["phone"];
     $email = $_SESSION["email"];
-    $user_id = $_SESSION["user_id"]; // Make sure this is set during login
+    $user_id = $_SESSION["user_id"];
 
 
     $sql = "SELECT * FROM user_data WHERE phone_no = '$phone' and email_id = '$email'";
@@ -24,7 +26,6 @@
     }
 
 
-    // Fetch recent 5 lists created by user
     $recentLists = [];
     $recentQuery = "SELECT * FROM grocery_lists WHERE user_id = '$user_id' ORDER BY created_at DESC LIMIT 10";
     $recentResult = mysqli_query($conn, $recentQuery);
@@ -69,46 +70,17 @@
     FROM shared_lists sl
     JOIN grocery_lists gl ON sl.list_id = gl.list_id
     WHERE sl.shared_by_user_id = '$user_id'
-    AND gl.list_id IN ($listIds)
-";
+    AND gl.list_id IN ($listIds)";
 
-$sharedResult1 = mysqli_query($conn, $sharedQuery1);
-$sharedLists1 = [];
+    $sharedResult1 = mysqli_query($conn, $sharedQuery1);
+    $sharedLists1 = [];
 
-while ($row1 = mysqli_fetch_assoc($sharedResult1)) {
-    $sharedLists1[] = $row1;
-}
+    while ($row1 = mysqli_fetch_assoc($sharedResult1)) {
+        $sharedLists1[] = $row1;
+    }
 
-        mysqli_close($conn);
+    mysqli_close($conn);
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Groceryz</title>
-    <link rel="icon" type="image/x-icon" href="../pictures/app_logo.png" sizes="64X64">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <header class="header">
-        <figure>
-            <img src="../pictures/logo_with_name-removebg-preview.png" alt="Site Logo" height="100px">
-        </figure>
-        <nav>
-            <ul style="list-style-type: none; color: white; text-decoration:none;">
-                <a href="adminHomePage.php"><li id="home">Home</li></a>
-                <a href="userDetails.php"><li id="users">Users</li></a>
-                <a href="aboutUs.php"><li id="aboutUs">About Us</li></a>
-                <a href="contactUs.php"><li id="contact">Contact</li></a>
-                <a href="#" class="activeTab"><li id="profile"><i class="fa-solid fa-circle-user fa-2xl"></i></li></a>
-            </ul>
-        </nav>
-    </header>
 
 
     <main>
@@ -132,59 +104,73 @@ while ($row1 = mysqli_fetch_assoc($sharedResult1)) {
 
         <section class="recentLists">
             <h2>Recent Lists</h2>
-            <div class="listGrid">
-                <?php
-                // Loop through the recent lists array and display each list in grid style
-                for ($i = 0; $i < 10; $i++) {
-                    if (!isset($recentLists[$i])) {
-                        break;  // Stop the loop if there are no more lists
-                    }
-                    
-                    echo "<div class='listItem'>";
-                    echo htmlspecialchars($recentLists[$i]['list_name']);
-                    echo "</div>";
-                }                ?>
-            </div>
+            <?php if (count($recentLists) === 0): ?>
+                <p>No lists available.</p>
+            <?php else: ?>
+                <div class="listGrid">
+                    <?php
+                    $maxLists = min(10, count($recentLists)); // Display max 10 lists
+                    for ($i = 0; $i < $maxLists; $i++):
+                        $list = $recentLists[$i];
+                        $list_id = $list['list_id'];
+                        $list_name = htmlspecialchars($list['list_name']);
+                    ?>
+                        <a href="groceryList.php?recent_list_id=<?php echo $list_id; ?>" class="listItemLink">
+                            <div class="listItem">
+                                <?php echo $list_name; ?>
+                            </div>
+                        </a>
+
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
         </section>
 
         <section class="shareingInfo">
-    <h2>Shared Lists</h2>
-    <?php if (count($sharedLists) === 0): ?>
-        <p>No shared lists available from recent 10.</p>
-    <?php else: ?>
-        <div class="slistGrid">
-            <?php
-            $maxLists = min(10, count($sharedLists)); // Display max 10 lists
-            for ($i = 0; $i < $maxLists; $i++):
-                $list = $sharedLists[$i];
-                $list_id = $list['list_id'];
-                $list_name = htmlspecialchars($list['list_name']);
-                $permission = htmlspecialchars($list['permission']);
-            ?>
-                <a href="groceryList.php?list_id=<?php echo $list_id; ?>" class="listItemLink">
-                    <div class="slistItem">
-                        <?php echo $list_name; ?>
-                        <small>(<?php echo $permission; ?>)</small>
-                    </div>
-                </a>
-            <?php endfor; ?>
-        </div>
-    <?php endif; ?>
-</section>
+            <h2>Shared Lists</h2>
+            <?php if (count($sharedLists) === 0): ?>
+                <p>No shared lists available.</p>
+            <?php else: ?>
+                <div class="slistGrid">
+                    <?php
+                    $maxsLists = min(10, count($sharedLists)); // Display max 10 lists
+                    for ($i = 0; $i < $maxsLists; $i++):
+                        $slist = $sharedLists[$i];
+                        $slist_id = $slist['list_id'];
+                        $slist_name = htmlspecialchars($slist['list_name']);
+                        $spermission = htmlspecialchars($slist['permission']);
+                    ?>
+                        <a href="groceryList.php?shared_list_id=<?php echo $slist_id; ?>" class="slistItemLink">
+                            <div class="slistItem">
+                                <?php echo $slist_name; ?>
+                                <small>(<?php echo $spermission; ?>)</small>
+                            </div>
+                        </a>
+
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
+        </section>
 
         <section class="sharedListsSection">
             <h2>Lists You've Shared</h2>
             <?php if (count($sharedLists1) > 0): ?>
                 <div class="sharedListGrid">
                     <?php
-                    $maxShared = min(10, count($sharedLists1));
-                    for ($i = 0; $i < $maxShared; $i++):
-                        $list1 = $sharedLists1[$i];
+                    $maxSharedLists = min(10, count($sharedLists1));
+                    for ($i = 0; $i < $maxSharedLists; $i++):
+                        $sharedList = $sharedLists1[$i];
+                        $sharedList_id = $sharedList['list_id'];
+                        $sharedList_name = htmlspecialchars($sharedList['list_name']);
+                        $sharedPermission = htmlspecialchars($sharedList['permission']);
                     ?>
-                        <div class="sharedListItem">
-                            <?php echo htmlspecialchars($list1['list_name']); ?>
-                            <small>(Permission: <?php echo ucfirst($list1['permission']); ?>)</small>
-                        </div>
+                        <a href="groceryList.php?i_shared_list_id=<?php echo $sharedList_id; ?>" class="sharedListItemLink">
+                            <div class="sharedListItem">
+                                <?php echo $sharedList_name; ?>
+                                <small>(<?php echo $sharedPermission; ?>)</small>
+                            </div>
+                        </a>
+
                     <?php endfor; ?>
                 </div>
             <?php else: ?>
@@ -199,56 +185,10 @@ while ($row1 = mysqli_fetch_assoc($sharedResult1)) {
             </span>
         </section>
 
-    </main>
-
-
-    <footer class="footer">
-        <section class="socialMedia">
-            <div>
-                <a href="https://github.com/Ktalesha01">
-                <i class="fa-brands fa-github fa-2xl"></i>
-                <p>GitHub</p>
-                </a>
-            </div>
-            <div>
-                <a href="mailto:kalpeshtalesha01official@gmail.com">
-                <i class="fa-regular fa-envelope fa-2xl"></i>
-                <p>Mail</p>
-                </a>
-            </div>
-            <div>
-                <a href="https://www.linkedin.com/in/kalpesh-talesha-881b75311/">
-                <i class="fa-brands fa-linkedin fa-2xl"></i>
-                <p>Linked In</p>
-                </a>
-            </div>
-            <div>
-                <a href="https://www.instagram.com/ktalesha01.official/?next=%2F&hl=en">
-                <i class="fa-brands fa-instagram fa-2xl"></i>
-                <p>Instagram</p>
-                </a>
-            </div>
-            <div>
-                <a href="https://wa.me/+917208495230">
-                <i class="fa-brands fa-whatsapp fa-2xl"></i>  
-                <p>Whatsapp</p>
-                </a>
-            </div>
-        </section>
-        <nav>
-            <ul style="list-style-type: none;">
-                <a href="#"><li>Home</li></a>
-                <a href="userDetails.php"><li>Users</li></a>
-                <a href="aboutUs.php"><li>About Us</li></a>
-                <a href="contactUs.php"><li>Contact Us</li></a>
-            </ul>
-        </nav>
-        <p>
-            Copyright &copy;2025 Groceryz <br>
-            All Rights Reserved <br>
-            Designed by- Kalpesh Talesha
-        </p>
-    </footer>
+    <?php
+        require "../php/footer.php";
+    ?>
+    
     <script src="js/dashboard.js"></script>
 </body>
 </html>

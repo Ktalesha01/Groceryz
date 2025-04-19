@@ -1,3 +1,7 @@
+main h2{
+    color: #1e8c4e;
+}
+
 .userInfoSection{
     display: flex;
     height: 30.5vh;
@@ -84,20 +88,8 @@
     text-align: center;
 }
 
-.listGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 5 columns in each row */
-    gap: 10px; /* Space between items */
-    justify-items: center; /* Center items horizontally */
-}
-
-.slistGrid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 5 columns in each row */
-    gap: 10px; /* Space between items */
-    justify-items: center; /* Center items horizontally */
-}
-
+.listGrid,
+.slistGrid,
 .sharedListGrid{
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 5 columns in each row */
@@ -106,9 +98,16 @@
 }
 
 
+.listItemLink,
+.slistItemLink,
+.sharedListItemLink{
+    text-decoration: none;
+}
+
 .listItem,
 .slistItem,
 .sharedListItem {
+    color: black;
     min-width: 35vh;
     cursor: pointer;
     font-size: large;

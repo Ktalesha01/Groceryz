@@ -13,7 +13,7 @@ function hasEditPermission($conn, $user_id, $list_id) {
     return mysqli_num_rows($sharedCheck) > 0;
 }
 
-if (!hasEditPermission($conn, $_SESSION["user_id"], $_POST["list_id"])) {
+if (!hasEditPermission($conn, $_SESSION["user_id"], $_SESSION["list_id"])) {
     echo "You do not have permission to edit this list.";
     exit();
 }

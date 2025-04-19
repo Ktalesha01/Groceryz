@@ -1,0 +1,160 @@
+
+body{
+    margin: 0%;
+    padding: 0%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+}
+.login-signup{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.loginFormSection{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signUpFormSection{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.active{
+    display: flex;
+}
+#switchToSignUp{
+    cursor: pointer;
+    color: blue;
+}
+#switchToLogin{
+    cursor: pointer;
+    color: blue;
+}
+#loginForm{
+    display: flex;
+    flex-direction: column;
+
+}
+#signUpForm{
+    display: flex;
+    flex-direction: column;
+
+}
+#loginSectionButton{
+    width: 50%;
+}
+#signUpSectionButton{
+    width: 50%;
+}
+.formNavigation{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.login-signup {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 320px;
+    margin-top: 20px;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s ease;
+}
+
+.login-signup:not(.hideArticle) {
+    opacity: 1;
+    transform: scale(1);
+}
+
+nav.formNavigation {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.formNavigation .activeFormType, nav button.active, nav button:hover {
+    color: #27ae60;
+    border-bottom: 2px solid #27ae60;
+}
+
+
+.loginFormSection.active, .signUpFormSection.active {
+    display: block;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #27ae60;
+    box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+}
+
+form button {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #2ecc71;
+}
+
+p{
+    text-align: center;
+}
+
+.login-signup section p span {
+    color: #3498db;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#errorMessage{
+    color: red;
+    text-align: center;
+    margin: 0;
+}
+#rerrorMessage{
+    color: red;
+    text-align: center;
+}

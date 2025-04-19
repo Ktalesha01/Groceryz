@@ -71,7 +71,7 @@ function renameList() {
 }
 
 function newList() {
-    window.location.href = "adminHomePage.php";
+    window.location.href = "homePage.php";
 }
 
 function openList() {
@@ -91,7 +91,7 @@ function closeList() {
         .then(response => {
             if (response.trim() === "success") {
                 alert("List closed.");
-                window.location.href = "adminHomePage.php";
+                window.location.href = "homePage.php";
             } else {
                 alert("Unable to close list.");
             }

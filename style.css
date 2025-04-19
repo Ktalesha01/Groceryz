@@ -1,3 +1,6 @@
+.hideArticle{
+    display: none;
+}
 
 body{
     margin: 0%;
@@ -8,153 +11,127 @@ body{
     align-items: center;
     background-color: rgb(240, 240, 240);
 }
-.login-signup{
+.appName{
+    font-family: "Lucida Console", Courier, monospace;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    animation-name: hideAppName, visibleAppName;
+    animation-duration: 3.3s, 10s;
+    animation-delay: 0s, 3.3s;
+    animation-timing-function: ease,ease;
+    animation-iteration-count: 1, infinite;
 }
-.loginFormSection{
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.signUpFormSection{
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.active{
-    display: flex;
-}
-#switchToSignUp{
-    cursor: pointer;
-    color: blue;
-}
-#switchToLogin{
-    cursor: pointer;
-    color: blue;
-}
-#loginForm{
-    display: flex;
-    flex-direction: column;
-
-}
-#signUpForm{
-    display: flex;
-    flex-direction: column;
-
-}
-#loginSectionButton{
-    width: 50%;
-}
-#signUpSectionButton{
-    width: 50%;
-}
-.formNavigation{
-    display: flex;
-    flex-direction: row;
-}
-
-
-.login-signup {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 320px;
-    margin-top: 20px;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: all 0.5s ease;
-}
-
-.login-signup:not(.hideArticle) {
-    opacity: 1;
-    transform: scale(1);
-}
-
-nav.formNavigation {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-nav button {
-    background: none;
-    border: none;
-    color: #333;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 10px;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.formNavigation .activeFormType, nav button.active, nav button:hover {
-    color: #27ae60;
-    border-bottom: 2px solid #27ae60;
-}
-
-
-.loginFormSection.active, .signUpFormSection.active {
-    display: block;
-}
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-form input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-form input:focus {
-    outline: none;
-    border-color: #27ae60;
-    box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
-}
-
-form button {
-    width: 90%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: #2ecc71;
-}
-
-p{
+#appNameMain{
+    color: #023E73;
     text-align: center;
+    font-size: 6rem;
 }
-
-.login-signup section p span {
-    color: #3498db;
+#appNameSub{
+    color: #1868ae;
+    text-align: center;
+    font-size: 3.6rem;
+}
+.logo{
+    background-color: white;
+    border-radius: 1rem;
     cursor: pointer;
-    text-decoration: underline;
+    width: 60rem;
+    display: flex;
+    flex-direction: column;
 }
-
-#errorMessage{
-    color: red;
-    text-align: center;
-    margin: 0;
+.section1{
+    display: flex;
+    align-items: center;
+    width: 60rem;
+    height: 30rem;
 }
-#rerrorMessage{
-    color: red;
+.section2{
+    display: flex;
+    justify-content: space-evenly;
+    width: 60rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.click{
+    display: flex;
+    justify-content: center;
     text-align: center;
+    animation-name: hideClick, blinkingText;
+    animation-duration: 3.3s, 1.5s;
+    animation-delay: 0s, 3.3s;
+    animation-timing-function: ease, ease-in-out;
+    animation-iteration-count: 1, infinite;
+}
+#appLogo{
+    margin-left: 60px;
+    position: relative;
+    animation-name: fade, sizeDown, slideLeft;
+    animation-duration: .5s, 1.3s, 1.5s;
+    animation-delay: 0s , .5s, 1.8s;
+    animation-timing-function: ease, ease, ease;
+}
+@keyframes fade {
+    from{
+        left: 19%;
+        height: 550px;
+        opacity: 0;
+    }
+    to{
+        left: 19%;
+        height: 550px;
+        opacity: 1;
+    }    
+}
+@keyframes sizeDown{
+    from{
+        left: 19%;
+        height: 550px;
+    }
+    to{
+        left: 23%;
+        height: 450px;
+    }
+} 
+@keyframes slideLeft{
+    from{
+        left: 23%;
+    }
+    to{
+        left: 0;
+    }
+}
+@keyframes hideAppName {
+    from{
+        display: none;
+    }
+    to{
+        display: none;
+    }
+}
+@keyframes visibleAppName {
+    from{
+        display: none;
+    }
+    to{
+        display: flex;
+        justify-content: center;
+    }
+}
+@keyframes hideClick {
+    from{
+        visibility: hidden;
+    }
+    to{
+        visibility: hidden;
+    }
+}
+@keyframes blinkingText {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
