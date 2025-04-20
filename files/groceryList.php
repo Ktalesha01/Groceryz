@@ -79,15 +79,24 @@ if (isset($_POST['selected_list_id'])) {
             $itemName = $_POST["name"];
             $itemType = $_POST["type"];
             $itemQty = $_POST["qty"];
-            $insertQuery = "INSERT INTO list_items (user_id, list_id, item_name, item_type, item_qty)
-                            VALUES('$user_id','$list_id','$itemName','$itemType','$itemQty')";
-    
-            if (mysqli_query($conn, $insertQuery)) {
-                header("Location: ".$_SERVER['PHP_SELF']);
-                exit();
-            } else {
-                echo "<script>alert('Error Adding Item.');</script>";
+
+            $duplicateQuery = "SELECT * FROM list_items WHERE list_id = '$list_id' AND user_id = '$user_id' AND item_name = '$itemName' AND item_type = '$itemType' AND item_qty = '$itemQty'";
+            $duplicateResult = mysqli_query($conn, $duplicateQuery);
+        
+            if (mysqli_num_rows($duplicateResult) > 0) {
+                echo "<script>alert('Duplicate entry. Item already exists.');</script>";
             }
+            else{
+                $insertQuery = "INSERT INTO list_items (user_id, list_id, item_name, item_type, item_qty)
+                VALUES('$user_id','$list_id','$itemName','$itemType','$itemQty')";
+
+                if (mysqli_query($conn, $insertQuery)) {
+                    header("Location: ".$_SERVER['PHP_SELF']);
+                    exit();
+                } else {
+                    echo "<script>alert('Error Adding Item.');</script>";
+                }
+            }            
         }
     }
 ?>
