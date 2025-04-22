@@ -218,7 +218,7 @@ if (isset($_POST['selected_list_id'])) {
                                         echo "<tr style=\"font-size: larger; background-color: #bbe3c6;\"><td colspan='3'><h3>" . ucfirst(htmlspecialchars($current_type)) . "</h3></td></tr>";
                                     }
                                     $is_done = $items['is_done'] ? 'checked' : '';
-                                    $row_style = $items['is_done'] ? 'style="text-decoration: line-through;"' : '';
+                                    $row_style = $items['is_done'] ? 'style="text-decoration: line-through;font-size: larger; text-align: left;"' : '';
 
                                     echo "<tr $row_style style=\"font-size: larger; text-align: left;\">
                                         <td style=\"width: 55%;padding-left:2vw;\">" . htmlspecialchars($items['item_name']) . "</td>
