@@ -99,8 +99,8 @@ main select:focus{
     color: black;
     overflow: hidden;
     position: absolute;
-    top: 100%; /* places the menu directly below the button */
-    right: 0;  /* aligns it with the right edge of the button */
+    top: 100%; 
+    right: 0;  
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -184,8 +184,8 @@ main select:focus{
     width: 17vh;
     overflow: hidden;
     position: absolute;
-    top: 100%; /* places the menu directly below the button */
-    right: 0;  /* aligns it with the right edge of the button */
+    top: 100%; 
+    right: 0;  
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;

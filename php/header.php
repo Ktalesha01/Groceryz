@@ -1,5 +1,4 @@
 <?php
-// Get the current page name
 $currentPage = basename($_SERVER['PHP_SELF']);
 
 switch ($currentPage) {

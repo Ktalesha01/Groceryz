@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Redirect if no OTP was sent
 if (!isset($_SESSION['otp'])) {
     header("Location: forgotPassword.php");
     exit();
@@ -12,7 +11,6 @@ $otpError = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $enteredOtp = htmlspecialchars($_POST['otp']);
 
-    // Check OTP
     if ($enteredOtp == $_SESSION['otp']) {
         $_SESSION['otp_verified'] = true;
         header("Location: resetPassword.php");

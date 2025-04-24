@@ -3,11 +3,9 @@ require "databaseConnect.php";
 session_start();
 
 function hasEditPermission($conn, $user_id, $list_id) {
-    // Check if user is owner
     $ownerCheck = mysqli_query($conn, "SELECT * FROM grocery_lists WHERE list_id='$list_id' AND user_id='$user_id'");
     if (mysqli_num_rows($ownerCheck) > 0) return true;
 
-    // Check shared with edit permission
     $sharedCheck = mysqli_query($conn, "SELECT * FROM shared_lists WHERE list_id='$list_id' AND shared_with_user_id='$user_id' AND permission='edit'");
     return mysqli_num_rows($sharedCheck) > 0;
 }

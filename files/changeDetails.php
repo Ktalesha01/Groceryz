@@ -33,22 +33,19 @@ if (!isset($_SESSION["username"])) {
         $updatedPhone = $_POST["updatedPhone"];
         $updatedEmail = $_POST["updatedEmail"];
 
-        // ✅ Handle file upload safely
         if (isset($_FILES["updatedProfilePic"]) && $_FILES["updatedProfilePic"]["error"] === 0) {
             $photoTmp = $_FILES["updatedProfilePic"]["tmp_name"];
             $photoData = file_get_contents($photoTmp);
-            $photoData = base64_encode($photoData); // You can store this in DB
+            $photoData = base64_encode($photoData); 
         } else {
-            $photoData = ""; // or keep existing one from DB
+            $photoData = ""; 
         }
 
-        // Store data in session temporarily for confirmation page
         $_SESSION["updated_name"] = $updatedName;
         $_SESSION["updated_phone"] = $updatedPhone;
         $_SESSION["updated_email"] = $updatedEmail;
         $_SESSION["updated_profile"] = $photoData;
         $_SESSION["working_page"] = "changeDetails";
-        // ✅ Redirect to password confirmation
         header("Location: confirmPassword.php");
         exit();
     }

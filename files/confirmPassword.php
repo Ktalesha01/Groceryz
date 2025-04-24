@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../php/databaseConnect.php'; // make sure this connects to your DB
+require '../php/databaseConnect.php'; 
 
 if (!isset($_SESSION["username"])) {
     echo "<script>location.href='login.php'</script>";
@@ -16,7 +16,6 @@ if($_SESSION['working_page']=="changeDetails")
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirmUpdateDetails"])) {
         $enteredPassword = $_POST["passwordConfirmation"];
 
-        // Fetch current hashed password from DB
         $query = "SELECT password FROM user_data WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
         $result = mysqli_query($conn, $query);
 
@@ -25,13 +24,11 @@ if($_SESSION['working_page']=="changeDetails")
             $hashedPassword = $row["password"];
 
             if (password_verify($enteredPassword, $hashedPassword)) {
-                // Password correct, now update
                 $updatedName = $_SESSION["updated_name"];
                 $updatedPhone = $_SESSION["updated_phone"];
                 $updatedEmail = $_SESSION["updated_email"];
                 $profileData = $_SESSION["updated_profile"];
 
-                // Prepare update query
                 if (!empty($profileData)) {
                     $updateQuery = "UPDATE user_data SET `name`='$updatedName', `phone_no`='$updatedPhone', `email_id`='$updatedEmail', `profile_pic`='$profileData' WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
                 } else {
@@ -39,7 +36,6 @@ if($_SESSION['working_page']=="changeDetails")
                 }
 
                 if (mysqli_query($conn, $updateQuery)) {
-                    // Update session values
                     $_SESSION["username"] = $updatedName;
                     $_SESSION["phone"] = $updatedPhone;
                     $_SESSION["email"] = $updatedEmail;
@@ -63,7 +59,6 @@ else if($_SESSION['working_page']=="changePassword")
     {
         $enteredPassword = $_POST["passwordConfirmation"];
 
-        // Fetch current hashed password from DB
         $query = "SELECT password FROM user_data WHERE `phone_no` = '$phone' AND `email_id` = '$email'";
         $result = mysqli_query($conn, $query);
 
@@ -77,7 +72,6 @@ else if($_SESSION['working_page']=="changePassword")
                 $newPassword = $_SESSION['newPassword'];
                 $sql = "UPDATE user_data SET password = '$newPassword' WHERE phone_no = '$phone' AND email_id = '$email'";
 
-                // Execute the query
                 if (mysqli_query($conn, $sql)) {
                     $successMessage = "Password updated successfully.";
                     echo "<script>

@@ -50,7 +50,7 @@
     }
     
     if (count($recentListIds) > 0) {
-        $listIds = implode(",", $recentListIds); // Prepare the list IDs for the query
+        $listIds = implode(",", $recentListIds); 
     
         $sharedQuery = "SELECT gl.list_name, gl.list_id, sl.permission 
             FROM shared_lists sl
@@ -109,7 +109,7 @@
             <?php else: ?>
                 <div class="listGrid">
                     <?php
-                    $maxLists = min(10, count($recentLists)); // Display max 10 lists
+                    $maxLists = min(10, count($recentLists)); 
                     for ($i = 0; $i < $maxLists; $i++):
                         $list = $recentLists[$i];
                         $list_id = $list['list_id'];
@@ -133,7 +133,7 @@
             <?php else: ?>
                 <div class="slistGrid">
                     <?php
-                    $maxsLists = min(10, count($sharedLists)); // Display max 10 lists
+                    $maxsLists = min(10, count($sharedLists)); 
                     for ($i = 0; $i < $maxsLists; $i++):
                         $slist = $sharedLists[$i];
                         $slist_id = $slist['list_id'];

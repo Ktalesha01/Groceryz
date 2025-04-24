@@ -14,7 +14,6 @@
 
     <main id="main">
 
-<!-- Popup to name the grocery list -->
         <section id="listNamePopup" class="popup-section">
             <div>
                 <button id="closeBtn" name="closeBtn" type="button"><i class="fa-solid fa-xl fa-xmark"></i></button>

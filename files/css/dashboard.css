@@ -92,9 +92,9 @@ main h2{
 .slistGrid,
 .sharedListGrid{
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 5 columns in each row */
-    gap: 10px; /* Space between items */
-    justify-items: center; /* Center items horizontally */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; 
+    justify-items: center; 
 }
 
 

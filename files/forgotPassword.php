@@ -1,24 +1,19 @@
 <?php
 session_start();
-require '../vendor/autoload.php';  // PHPMailer autoload
-
+require '../vendor/autoload.php';  
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Initialize error
 $error = " ";
 
-// When form submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = htmlspecialchars($_POST["email"]);
 
-    // Validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Invalid email format.";
     } else {
-        $otp = rand(100000, 999999); // Generate OTP
+        $otp = rand(100000, 999999); 
 
-        // Store in session
         $_SESSION['otp'] = $otp;
         $_SESSION['otp_email'] = $email;
 
@@ -29,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'kalpeshtalesha01.official@gmail.com';
-            $mail->Password = 'apfr zgmk qpmb ymng'; // Secure this in future
+            $mail->Password = 'apfr zgmk qpmb ymng'; 
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
@@ -42,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $mail->send();
 
-            // Redirect on success
             header("Location: verifyOtp.php");
             exit();
         } catch (Exception $e) {

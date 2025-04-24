@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Check if OTP was verified
 if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
     header("Location: forgotPassword.php");
     exit();
@@ -17,13 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($newPassword !== $confirmPassword) {
         $passwordError = "Passwords do not match.";
     } else {
-        // Hash the password
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-        // Connect to DB
-        include '../php/databaseConnect.php'; // DB connection
+        include '../php/databaseConnect.php'; 
 
-        $email = $_SESSION['otp_email']; // Retrieved from session
+        $email = $_SESSION['otp_email']; 
         $sql = "UPDATE user_data SET password = '$hashedPassword' WHERE email_id = '$email'";
 
         if (mysqli_query($conn, $sql)) {

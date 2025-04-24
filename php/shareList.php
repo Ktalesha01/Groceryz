@@ -12,7 +12,6 @@ $shared_email = $_POST["email"];
 $list_id = $_POST["list_id"];
 $permission = isset($_POST["permission"]) && $_POST["permission"] === "edit" ? "edit" : "view";
 
-// Get the user ID for the shared email
 $getUserQuery = "SELECT id FROM user_data WHERE email_id = '$shared_email' LIMIT 1";
 $userRes = mysqli_query($conn, $getUserQuery);
 
@@ -20,14 +19,12 @@ if ($userRes && mysqli_num_rows($userRes) > 0) {
     $row = mysqli_fetch_assoc($userRes);
     $sharedUserId = $row["id"];
 
-    // Check if the list is already shared with this user
     $checkQuery = "SELECT * FROM shared_lists WHERE list_id = '$list_id' AND shared_with_user_id = '$sharedUserId'";
     $checkRes = mysqli_query($conn, $checkQuery);
 
     if (mysqli_num_rows($checkRes) > 0) {
         echo "List already shared with this user.";
     } else {
-        // Insert share record with shared_by_user_id
         $insert = "INSERT INTO shared_lists (list_id, shared_with_user_id, permission, shared_by_user_id) 
                    VALUES ('$list_id', '$sharedUserId', '$permission', '$owner_id')";
         if (mysqli_query($conn, $insert)) {

@@ -104,7 +104,6 @@ if (isset($_POST['selected_list_id'])) {
 
     <main id="main">
 
-<!-- Main grocery list app (hidden initially) -->
         <div id="groceryApp" class="grocery-app">
             <section class="itemDescription">
                 <div id="selectList">
@@ -201,7 +200,6 @@ if (isset($_POST['selected_list_id'])) {
                         </div>
                     </div>
                     <div id="listDisplay" class="list-display">
-                    <!-- List items will be shown here -->
                         <table>
                         <?php
                             $fetchQuery = "SELECT * FROM list_items WHERE list_id = '$list_id' ORDER BY item_type";

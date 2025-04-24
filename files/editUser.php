@@ -16,7 +16,6 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 $userId = intval($_GET['id']);
 $updateSuccess = null;
 
-// Fetch existing user data
 $query = "SELECT * FROM user_data WHERE id = $userId";
 $result = mysqli_query($conn, $query);
 $user = mysqli_fetch_assoc($result);
@@ -28,14 +27,12 @@ if (!$user) {
 
 $error = "";
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = mysqli_real_escape_string($conn, $_POST["name"]);
     $phone = mysqli_real_escape_string($conn, $_POST["phone_no"]);
     $email = mysqli_real_escape_string($conn, $_POST["email_id"]);
     $role = mysqli_real_escape_string($conn, $_POST["role"]);
 
-    // Check for duplicate phone or email (excluding current user)
     $checkQuery = "SELECT * FROM user_data WHERE (phone_no = '$phone' OR email_id = '$email') AND id != $userId";
     $checkResult = mysqli_query($conn, $checkQuery);
 

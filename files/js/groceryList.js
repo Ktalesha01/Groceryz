@@ -3,7 +3,6 @@ function toggleMenu() {
     menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
 }
 
-// Toggle visibility of the download menu
 function toggleDownloadMenu() {
     const menu = document.getElementById("downloadMenuList");
     menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
@@ -129,11 +128,11 @@ function downloadListAsExcel() {
     rows.forEach(row => {
         const cols = row.querySelectorAll("td");
         if (cols.length === 1) {
-            currentType = cols[0].innerText; // Store item type
+            currentType = cols[0].innerText; 
         } else if (cols.length === 3) {
             const itemName = cols[0].innerText;
             const qty = cols[1].innerText;
-            ws_data.push([itemName, currentType, qty]); // Swapped order
+            ws_data.push([itemName, currentType, qty]); 
         }
     });
 
@@ -164,7 +163,7 @@ function downloadListAsPDF() {
         } else if (cols.length === 3) {
             const itemName = cols[0].innerText;
             const qty = cols[1].innerText;
-            data.push([itemName, currentType, qty]); // Swapped order
+            data.push([itemName, currentType, qty]);
         }
     });
 
